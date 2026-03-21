@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UAL RHA / Active HRA Calculator</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy-deep:  #0b1630;
+    --navy:       #0e1d3e;
+    --navy-mid:   #162050;
+    --navy-light: #1e2d6b;
+    --blue:       #2b4acb;
+    --blue-med:   #3d63e8;
+    --blue-light: #4d7ef7;
+    --blue-sky:   #b8d4f5;
+    --blue-bg:    #e8f1fd;
+    --gold:       #f5a623;
+    --white:      #ffffff;
+    --off-white:  #f2f5fc;
+    --text-dark:  #0e1d3e;
+    --text-mid:   #334477;
+    --text-muted: #6680aa;
+    --text-light: #99aac8;
+    --border:     #d0daf0;
+    --border-mid: #b8c8e8;
+    --input-bg:   #f8faff;
+    --green:      #1a7a3c;
+    --green-bg:   #e6f5ec;
+    --green-bdr:  #5cb87a;
+    --amber:      #b86a00;
+    --amber-bg:   #fff3e0;
+    --amber-bdr:  #f5a623;
+    --red:        #c0392b;
+    --red-bg:     #fdf2f0;
+    --red-bdr:    #e07060;
+    --radius-sm:  4px;
+    --radius:     8px;
+    --radius-lg:  12px;
+    --shadow-sm:  0 1px 3px rgba(14,29,62,0.08);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--off-white); color: var(--text-dark); font-family: 'Inter', sans-serif; font-size: 14px; min-height: 100vh; padding-bottom: 60px; }
+
+  /* Header */
+  .header { background: var(--navy-deep); padding: 0 28px; height: 58px; display: flex; align-items: center; gap: 16px; }
+  .header-badge { background: var(--gold); color: var(--navy-deep); font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; padding: 4px 10px; border-radius: var(--radius-sm); }
+  .header-sep { width: 1px; height: 20px; background: rgba(255,255,255,.14); }
+  .header-title { color: var(--white); font-size: 15px; font-weight: 600; }
+  .header-ver { margin-left: auto; color: var(--text-light); font-size: 12px; }
+  .back-link { color: var(--blue-sky); font-size: 12px; text-decoration: none; }
+  .back-link:hover { color: var(--white); }
+
+  /* Banner */
+  .banner { background: var(--navy-mid); border-bottom: 3px solid var(--blue-med); padding: 12px 28px; }
+  .banner p { color: var(--blue-sky); font-size: 12.5px; line-height: 1.6; }
+  .banner p strong { color: var(--gold); }
+
+  /* Page */
+  .page { max-width: 720px; margin: 0 auto; padding: 28px 20px 0; display: flex; flex-direction: column; gap: 16px; }
+
+  /* Card */
+  .card { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius-lg); box-shadow: var(--shadow-sm); overflow: hidden; }
+  .card-hd { background: var(--navy); padding: 12px 20px; display: flex; align-items: center; gap: 10px; }
+  .step-dot { width: 24px; height: 24px; border-radius: 50%; background: var(--blue-med); color: var(--white); font-size: 11px; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .step-dot.gold { background: var(--gold); color: var(--navy-deep); }
+  .card-title { color: var(--white); font-size: 14px; font-weight: 600; }
+  .card-bd { padding: 20px; }
+
+  /* Explainer card */
+  .explainer { background: var(--navy-mid); border: 1px solid rgba(77,126,247,0.3); border-radius: var(--radius-lg); padding: 18px 20px; }
+  .explainer-title { font-size: 11px; font-weight: 700; letter-spacing: .09em; text-transform: uppercase; color: var(--gold); margin-bottom: 10px; }
+  .explainer p { font-size: 12.5px; color: var(--blue-sky); line-height: 1.7; margin-bottom: 8px; }
+  .explainer p:last-child { margin-bottom: 0; }
+  .explainer strong { color: var(--white); }
+
+  /* Limits strip */
+  .limits-strip { display: grid; grid-template-columns: repeat(4, 1fr); background: var(--navy-mid); border-radius: var(--radius); overflow: hidden; margin-bottom: 14px; }
+  .lim-cell { padding: 10px 12px; border-right: 1px solid rgba(255,255,255,.07); }
+  .lim-cell:last-child { border-right: none; }
+  .lim-lbl { font-size: 9px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--text-light); margin-bottom: 3px; }
+  .lim-val { font-size: 13px; font-weight: 700; color: var(--gold); }
+
+  /* Section */
+  .sec { font-size: 11px; font-weight: 700; letter-spacing: .07em; text-transform: uppercase; color: var(--blue); padding-bottom: 9px; border-bottom: 1px solid var(--border); margin-bottom: 14px; margin-top: 18px; }
+  .sec:first-child { margin-top: 0; }
+
+  /* Grids */
+  .g2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .g3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; }
+
+  /* Fields */
+  .field { display: flex; flex-direction: column; gap: 5px; }
+  .lbl { font-size: 11px; font-weight: 600; color: var(--text-muted); letter-spacing: .05em; text-transform: uppercase; }
+  .hint { font-size: 11px; color: var(--text-light); line-height: 1.4; margin-top: 2px; }
+  .warn { font-size: 11px; color: var(--red); font-weight: 600; margin-top: 3px; display: none; }
+
+  input[type="number"], select {
+    background: var(--input-bg); border: 1px solid var(--border-mid); color: var(--text-dark);
+    font-family: 'Inter', sans-serif; font-size: 14px; font-weight: 500; padding: 9px 12px;
+    border-radius: var(--radius); width: 100%; outline: none; -webkit-appearance: none; appearance: none;
+    transition: border-color .14s, box-shadow .14s;
+  }
+  input[type="number"]:focus, select:focus { border-color: var(--blue-light); box-shadow: 0 0 0 3px rgba(77,126,247,.16); }
+  input[type="number"].invalid { border-color: var(--red-bdr); }
+  input[type="number"]::-webkit-inner-spin-button { -webkit-appearance: none; }
+  select { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='11' height='7'%3E%3Cpath fill='%236680aa' d='M1 1l4.5 4.5L10 1'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 12px center; padding-right: 32px; cursor: pointer; }
+
+  /* Age badge */
+  .age-badge { display: inline-flex; align-items: center; gap: 6px; background: var(--blue-bg); border: 1px solid var(--blue-light); border-radius: var(--radius); padding: 6px 12px; font-size: 12px; font-weight: 600; color: var(--blue); margin-top: 6px; }
+  .age-badge span { font-size: 15px; font-weight: 700; }
+
+  /* Result rows */
+  .rrow { display: flex; align-items: center; justify-content: space-between; padding: 10px 14px; background: var(--white); border: 1px solid var(--border); border-radius: var(--radius-sm); margin-bottom: 6px; }
+  .rrow:last-child { margin-bottom: 0; }
+  .rrow.navy  { background: var(--navy); border-color: var(--navy); }
+  .rrow.navy .rl  { color: var(--blue-sky); }
+  .rrow.navy .rv  { color: var(--gold); font-size: 18px; }
+  .rrow.green { background: var(--green-bg); border-color: var(--green-bdr); }
+  .rrow.green .rl { color: var(--green); font-weight: 600; }
+  .rrow.green .rv { color: var(--green); }
+  .rrow.amber { background: var(--amber-bg); border-color: var(--amber-bdr); }
+  .rrow.amber .rl { color: var(--amber); font-weight: 500; }
+  .rrow.red   { background: var(--red-bg); border-color: var(--red-bdr); }
+  .rrow.red .rl   { color: var(--red); font-weight: 600; }
+  .rrow.red .rv   { color: var(--red); }
+
+  .rl { font-size: 13px; font-weight: 500; color: var(--text-mid); flex: 1; line-height: 1.4; }
+  .rl-sub { font-size: 11px; color: var(--text-light); font-weight: 400; margin-top: 2px; display: block; }
+  .rr { text-align: right; flex-shrink: 0; margin-left: 12px; }
+  .rv { font-size: 16px; font-weight: 700; color: var(--text-dark); font-variant-numeric: tabular-nums; }
+  .rs { font-size: 10px; color: var(--text-light); margin-top: 2px; }
+
+  .hr { border: none; border-top: 1px solid var(--border); margin: 14px 0; }
+
+  /* Callout */
+  .callout { background: var(--blue-bg); border-left: 3px solid var(--blue-light); border-radius: 0 var(--radius-sm) var(--radius-sm) 0; padding: 10px 14px; font-size: 12px; color: var(--text-mid); line-height: 1.6; margin-bottom: 14px; }
+  .callout strong { color: var(--blue); }
+  .callout.amber-call { background: var(--amber-bg); border-left-color: var(--amber-bdr); color: var(--amber); }
+  .callout.amber-call strong { color: var(--amber); }
+
+  /* Hidden optimization section */
+  #opt-section { display: none; }
+
+  /* Disc */
+  .disc { background: var(--navy-mid); border-radius: var(--radius); padding: 12px 16px; font-size: 11px; color: var(--text-light); line-height: 1.65; }
+
+  .flash { animation: fsh .35s ease; }
+  @keyframes fsh { 0%{opacity:.3} 100%{opacity:1} }
+
+  @media (max-width: 580px) {
+    .g2, .g3, .limits-strip { grid-template-columns: 1fr 1fr; }
+    .header, .banner { padding-left: 16px; padding-right: 16px; }
+    .page { padding: 16px 12px 0; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-badge">UAL ALPA</div>
+  <div class="header-sep"></div>
+  <div class="header-title">RHA / Active HRA Calculator</div>
+  <a class="back-link" href="index.html">← All Tools</a>
+</div>
+
+<div class="banner">
+  <p><strong>What this calculator does:</strong> Estimates how much of your employer B/C contributions will "spill" to your RHA or Active HRA due to IRS limits on the PRAP — and shows how adjusting your 401(k) contributions could reduce that spill in certain situations.</p>
+</div>
+
+<div class="page">
+
+  <!-- Overview -->
+  <div class="explainer">
+    <div class="explainer-title">How RHA/Active HRA Spill Works</div>
+    <p>The PRAP (Pilot Retirement Account Plan) has two IRS-imposed limits that cause B/C contributions to spill out:</p>
+    <p><strong>IRC 415(c) — Annual additions limit:</strong> Total contributions to the PRAP (B/C + profit sharing + vacation forfeiture + your 401k + post-tax) cannot exceed <strong id="exp-415c">$72,000</strong> per year (<strong id="exp-415c-50">$80,000</strong> if age 50+, <strong id="exp-415c-6063">$83,250</strong> if age 60–63). Excess B/C contributions spill to the RHA/Active HRA.</p>
+    <p><strong>IRC 401(a)(17) — Compensation limit:</strong> B/C contributions on pensionable income above <strong id="exp-comp-cap">$360,000</strong> cannot go to the PRAP. The first <strong>$10,000</strong> of this overage spills to the RHA/Active HRA; above <strong id="exp-rha-limit">$415,556</strong>, it becomes taxable <strong>PRAP Cash</strong>.</p>
+    <p><strong>If enrolled in United's active medical plan:</strong> spill goes to your Active HRA. If not enrolled, it goes to your RHA.</p>
+  </div>
+
+  <!-- IRS Limits strip -->
+  <div class="limits-strip" id="limitsStrip">
+    <div class="lim-cell"><div class="lim-lbl">Plan Year</div><div class="lim-val" id="lim-year">2026</div></div>
+    <div class="lim-cell"><div class="lim-lbl">B/C Rate</div><div class="lim-val" id="lim-bc">18%</div></div>
+    <div class="lim-cell"><div class="lim-lbl">415(c) Limit</div><div class="lim-val" id="lim-415c">$72,000</div></div>
+    <div class="lim-cell"><div class="lim-lbl">401(a)(17) Cap</div><div class="lim-val" id="lim-comp">$360,000</div></div>
+  </div>
+
+  <!-- ① Inputs -->
+  <div class="card">
+    <div class="card-hd"><div class="step-dot">1</div><div class="card-title">Your Information</div></div>
+    <div class="card-bd">
+
+      <div class="sec">Pay &amp; Income</div>
+      <div class="g2">
+        <div class="field">
+          <div class="lbl">Hourly Pay Rate ($)</div>
+          <input type="number" id="payRate" min="0" max="1000" step="0.01" value="483.74" oninput="calculate()">
+          <div class="hint">Your contractual hourly rate</div>
+        </div>
+        <div class="field">
+          <div class="lbl">International Override</div>
+          <input type="number" id="intlOverride" min="0" max="7" step="0.25" value="0" oninput="calculate()">
+          <div class="hint">CA: 0–7.00 · FO: 0–5.00 (100% intl = max)</div>
+        </div>
+        <div class="field">
+          <div class="lbl">Projected Monthly Hours of Pay</div>
+          <input type="number" id="monthlyHrs" min="0" max="200" value="80" oninput="calculate()">
+          <div class="hint">Annual avg/mo. Reserve MPG ≈ 73 · 1,000 hr/yr ≈ 83</div>
+        </div>
+        <div class="field">
+          <div class="lbl">Profit Sharing ($)</div>
+          <input type="number" id="profitShare" min="0" value="0" oninput="calculate()">
+          <div class="hint">Gross amount on paycheck</div>
+        </div>
+      </div>
+
+      <div class="sec">Personal Details</div>
+      <div class="g2">
+        <div class="field">
+          <div class="lbl">Age (as of Dec 31, <span id="plan-year-lbl">2026</span>)</div>
+          <input type="number" id="age" min="21" max="70" value="50" oninput="calculate()">
+          <div id="age-badge" class="age-badge" style="align-self:flex-start;">Age bracket: <span id="age-bracket-text">50–59</span></div>
+        </div>
+        <div class="field">
+          <div class="lbl">Forfeited Vacation Days into PRAP</div>
+          <input type="number" id="vacDays" min="0" max="21" value="0" oninput="calculate()">
+          <div class="hint">Max 21 days per UPA 24-G-4. Days forfeited in June.</div>
+          <div class="warn" id="vac-warn">⚠ Maximum is 21 days</div>
+        </div>
+      </div>
+
+      <div class="sec">PRAP Contributions</div>
+      <div class="g2">
+        <div class="field">
+          <div class="lbl">401(k) Voluntary Contributions ($)</div>
+          <input type="number" id="k401" min="0" value="0" oninput="calculate()">
+          <div class="hint" id="k401-hint">Pre-Tax and/or Roth — not the B/C employer contribution</div>
+          <div class="warn" id="k401-warn"></div>
+        </div>
+        <div class="field">
+          <div class="lbl">Voluntary Post-Tax Contributions ($)</div>
+          <input type="number" id="postTax" min="0" value="0" oninput="calculate()">
+          <div class="hint">After-tax voluntary contributions</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ② Results -->
+  <div class="card">
+    <div class="card-hd"><div class="step-dot gold">✓</div><div class="card-title">Results</div></div>
+    <div class="card-bd">
+
+      <!-- Pensionable income -->
+      <div class="rrow navy">
+        <div class="rl">Pensionable Income
+          <span class="rl-sub">Flight pay + intl override + monthly hrs × 12 + profit sharing</span>
+        </div>
+        <div class="rr"><div class="rv" id="res-pensionable">—</div></div>
+      </div>
+
+      <div class="hr"></div>
+
+      <!-- B/C to PRAP -->
+      <div class="rrow">
+        <div class="rl">B/C Contribution to PRAP
+          <span class="rl-sub">18% of pensionable income, capped at 401(a)(17) limit</span>
+        </div>
+        <div class="rr"><div class="rv" id="res-bc-prap">—</div></div>
+      </div>
+
+      <!-- Vacation forfeiture -->
+      <div class="rrow" id="vac-row">
+        <div class="rl">Vacation Forfeiture Contribution
+          <span class="rl-sub">Days × hourly rate × 4.25 + 18% B/C on that amount</span>
+        </div>
+        <div class="rr"><div class="rv" id="res-vac-cr">—</div></div>
+      </div>
+
+      <!-- Total PRAP contributions -->
+      <div class="rrow amber">
+        <div class="rl">Total PRAP Contributions
+          <span class="rl-sub">B/C + profit sharing + vacation + 401(k) + post-tax</span>
+        </div>
+        <div class="rr">
+          <div class="rv" id="res-total-prap">—</div>
+          <div class="rs" id="res-prap-limit-label">Limit: —</div>
+        </div>
+      </div>
+
+      <div class="hr"></div>
+
+      <!-- RHA spill -->
+      <div class="rrow red" id="spill-row">
+        <div class="rl">RHA / Active HRA Spillage
+          <span class="rl-sub">Total amount of B/C contributions that cannot enter the PRAP</span>
+        </div>
+        <div class="rr">
+          <div class="rv" id="res-rha-spill">—</div>
+        </div>
+      </div>
+
+      <!-- PRAP Cash -->
+      <div class="rrow" id="prap-cash-row">
+        <div class="rl">PRAP Cash (Taxable)
+          <span class="rl-sub">18% of income above $<span id="res-rha-limit-inline">415,556</span> — paid as taxable cash</span>
+        </div>
+        <div class="rr"><div class="rv" id="res-prap-cash">$0</div></div>
+      </div>
+
+      <!-- Total -->
+      <div class="rrow green">
+        <div class="rl">Total Spill + PRAP Cash</div>
+        <div class="rr"><div class="rv" id="res-total">—</div></div>
+      </div>
+
+      <div class="hr"></div>
+
+      <!-- Optimization section — only shown when reducing is possible -->
+      <div id="opt-section">
+        <div class="callout amber-call">
+          <strong>💡 You may be able to reduce your RHA/Active HRA spill.</strong> By adjusting your 401(k) contribution, you could move money that currently spills to the RHA/Active HRA into the PRAP instead.
+        </div>
+
+        <div class="rrow amber">
+          <div class="rl">Spill Could Be Reduced To
+            <span class="rl-sub">By changing 401(k) to the amount shown below</span>
+          </div>
+          <div class="rr"><div class="rv" id="res-reduced-spill">—</div></div>
+        </div>
+
+        <div class="rrow green">
+          <div class="rl">Optimal 401(k) Contribution
+            <span class="rl-sub">Maximizes PRAP contributions while minimizing RHA/Active HRA spill</span>
+          </div>
+          <div class="rr"><div class="rv" id="res-optimal-k401">—</div></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Key limits reference -->
+  <div class="card">
+    <div class="card-hd"><div class="step-dot" style="background:var(--navy-light);">i</div><div class="card-title">2026 IRS Limit Reference</div></div>
+    <div class="card-bd">
+      <div class="g2">
+        <div class="rrow"><div class="rl">402(g) Base 401(k) Limit</div><div class="rr"><div class="rv" id="ref-402g">$24,500</div></div></div>
+        <div class="rrow"><div class="rl">Age 50+ Catch-Up</div><div class="rr"><div class="rv" id="ref-50plus">$8,000</div></div></div>
+        <div class="rrow"><div class="rl">Age 60–63 Catch-Up</div><div class="rr"><div class="rv" id="ref-6063">$11,250</div></div></div>
+        <div class="rrow"><div class="rl">Max 401(k) Age 50+</div><div class="rr"><div class="rv" id="ref-max-50">$32,500</div></div></div>
+        <div class="rrow"><div class="rl">Max 401(k) Age 60–63</div><div class="rr"><div class="rv" id="ref-max-6063">$35,750</div></div></div>
+        <div class="rrow"><div class="rl">415(c) Total PRAP Limit</div><div class="rr"><div class="rv" id="ref-415c">$72,000</div></div></div>
+        <div class="rrow"><div class="rl">415(c) Limit Age 50+</div><div class="rr"><div class="rv" id="ref-415c-50">$80,000</div></div></div>
+        <div class="rrow"><div class="rl">415(c) Limit Age 60–63</div><div class="rr"><div class="rv" id="ref-415c-6063">$83,250</div></div></div>
+        <div class="rrow"><div class="rl">401(a)(17) Income Cap</div><div class="rr"><div class="rv" id="ref-comp-cap">$360,000</div></div></div>
+        <div class="rrow"><div class="rl">RHA Spill Cap</div><div class="rr"><div class="rv">$10,000</div></div></div>
+      </div>
+      <div style="margin-top:12px;" class="callout">
+        <strong>Note for high earners:</strong> If you earned more than $145,000 in FICA wages in the prior year, all catch-up contributions (Age 50+ and 60–63) must be Roth. This is an IRS SECURE 2.0 requirement.
+      </div>
+      <div style="margin-top:10px;" class="callout">
+        <strong>Note on B/C rate timing:</strong> The B/C rate increased from 17% to 18% effective February 2026. Because pay is in arrears, January hours were paid at 17%. This calculator uses 18% for all 2026 pensionable income, which slightly overstates the January contribution.
+      </div>
+    </div>
+  </div>
+
+  <div class="disc">
+    ⚠ This calculator is an unofficial planning tool only. Your actual RHA/Active HRA contributions and PRAP amounts will differ based on your exact pay schedule, contribution timing, and other factors. This is not a guarantee of any amount. If you have questions, please send the R&amp;I Committee a PDR.
+  </div>
+
+</div><!-- /page -->
+
+<script>
+// ── 2026 IRS Limits ──────────────────────────────────────────────────────────
+const IRS = {
+  year:   2026,
+  bc:     0.18,      // B/C contribution rate
+  g402:   24500,     // 402(g) base
+  cu50:   8000,      // 414(v) catch-up age 50+
+  cu6063: 11250,     // catch-up age 60-63
+  c415:   72000,     // 415(c) base limit
+  a17:    360000,    // 401(a)(17) income cap  = 415c * 5
+  rhaIncLimit: 415555.56, // = a17 + 10000/bc
+};
+// Derived
+IRS.max401k_u50  = IRS.g402;
+IRS.max401k_50   = IRS.g402 + IRS.cu50;
+IRS.max401k_6063 = IRS.g402 + IRS.cu6063;
+IRS.c415_50      = IRS.c415 + IRS.cu50;
+IRS.c415_6063    = IRS.c415 + IRS.cu6063;
+
+// ── Helpers ──────────────────────────────────────────────────────────────────
+function fmt$(n) {
+  if (n === null || isNaN(n)) return '—';
+  return '$' + Math.round(n).toLocaleString('en-US');
+}
+function nv(id, def=0) {
+  const v = parseFloat(document.getElementById(id).value);
+  return isNaN(v) ? def : Math.max(0, v);
+}
+function upd(id, val) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  el.textContent = val;
+  try {
+    el.classList.remove('flash');
+    void el.offsetWidth;
+    el.classList.add('flash');
+  } catch(e) { /* ignore animation errors on static elements */ }
+}
+
+// ── Age bracket helpers ──────────────────────────────────────────────────────
+function get415Limit(age) {
+  if (age >= 60 && age <= 63) return IRS.c415_6063;
+  if (age >= 50)              return IRS.c415_50;
+  return IRS.c415;
+}
+function getMax401k(age) {
+  if (age >= 60 && age <= 63) return IRS.max401k_6063;
+  if (age >= 50)              return IRS.max401k_50;
+  return IRS.max401k_u50;
+}
+function ageBracket(age) {
+  if (age >= 60 && age <= 63) return '60–63 (special catch-up)';
+  if (age >= 50)              return '50–59 (catch-up eligible)';
+  return 'Under 50';
+}
+
+// ── Main calculation ─────────────────────────────────────────────────────────
+function calculate() {
+  const rate     = nv('payRate', 483.74);
+  const intl     = nv('intlOverride');
+  const hrs      = nv('monthlyHrs', 80);
+  const ps       = nv('profitShare');
+  const age      = nv('age', 50);
+  const vacDays  = Math.min(nv('vacDays'), 21);
+  const k401     = nv('k401');
+  const postTax  = nv('postTax');
+
+  // Validation
+  const vacEl = document.getElementById('vacDays');
+  const vacWarn = document.getElementById('vac-warn');
+  if (nv('vacDays') > 21) {
+    vacEl.classList.add('invalid');
+    vacWarn.style.display = 'block';
+  } else {
+    vacEl.classList.remove('invalid');
+    vacWarn.style.display = 'none';
+  }
+
+  const maxK401 = getMax401k(age);
+  const k401El  = document.getElementById('k401');
+  const k401Warn = document.getElementById('k401-warn');
+  if (k401 > maxK401) {
+    k401El.classList.add('invalid');
+    k401Warn.style.display = 'block';
+    k401Warn.textContent = `⚠ 401(k) limit for age ${age} is ${fmt$(maxK401)}`;
+  } else {
+    k401El.classList.remove('invalid');
+    k401Warn.style.display = 'none';
+  }
+
+  // Update age badge
+  document.getElementById('age-bracket-text').textContent = ageBracket(age);
+  document.getElementById('age-badge').title = `415(c) limit: ${fmt$(get415Limit(age))} · Max 401k: ${fmt$(maxK401)}`;
+
+  // ── Pensionable income ──
+  const pensionable = (rate + intl) * hrs * 12 + ps;
+
+  // ── B/C contribution to PRAP (capped at 401a17 income) ──
+  const bc_prap = pensionable > IRS.a17
+    ? IRS.a17 * IRS.bc
+    : pensionable * IRS.bc;
+
+  // ── Vacation forfeiture contribution (days × rate × 4.25) + 18% BC on that ──
+  const vacBase = rate * vacDays * 4.25;
+  const vacCr   = vacBase + vacBase * IRS.bc;
+
+  // ── 415(c) limit for this age ──
+  const limit415 = get415Limit(age);
+
+  // ── Total PRAP contributions ──
+  // = 401k + postTax + vacCr + bc_prap + profit_sharing_bc
+  // Note: profit sharing itself goes to PRAP, not a separate BC on it
+  const totalPRAP = k401 + postTax + vacCr + bc_prap;
+
+  // ── RHA/Active HRA Spill ──
+  // Two components:
+  // 1. 415(c) overflow: if totalPRAP > limit415, excess spills
+  // 2. 401(a)(17) spill: 18% on income $360k–$415.5k, capped at $10,000
+
+  // 415(c) component
+  const spill415 = Math.max(0, totalPRAP - limit415);
+
+  // 401(a)(17) component
+  let spill417 = 0;
+  if (pensionable > IRS.a17) {
+    spill417 = Math.min(10000, pensionable * IRS.bc - IRS.a17 * IRS.bc);
+  }
+
+  const rhaSpill = spill415 + spill417;
+
+  // ── PRAP Cash (taxable) — income above RHA income limit ──
+  const prapCash = pensionable > IRS.rhaIncLimit
+    ? (pensionable - IRS.rhaIncLimit) * IRS.bc
+    : 0;
+
+  const totalOut = rhaSpill + prapCash;
+
+  // ── Optimal 401(k) calculation ──
+  // Goal: find the minimum 401k contribution that maximizes PRAP
+  // Without contributing extra 401k beyond what's needed, spill goes to RHA
+  // Optimal = max(catch-up minimum, limit415 - bc_prap - vacCr - profitSharing_component)
+  // Using the spreadsheet logic for B37:
+  // min catch-up for age
+  const minCatchUp = (age >= 60 && age <= 63) ? IRS.cu6063 : (age >= 50 ? IRS.cu50 : 0);
+  // How much 401k is needed to fill the PRAP to its limit
+  const neededToFill = limit415 - bc_prap - vacCr;
+  const optK401 = Math.max(0, Math.max(minCatchUp, neededToFill));
+  const optK401Capped = Math.min(optK401, maxK401);
+
+  // Recalculate spill at optimal 401k
+  const totalPRAP_opt = optK401Capped + postTax + vacCr + bc_prap;
+  const spill415_opt = Math.max(0, totalPRAP_opt - limit415);
+  const reducedSpill = spill415_opt + spill417;
+
+  // Only show optimization if current spill > optimal spill and it's reducible
+  const canReduce = rhaSpill > reducedSpill && rhaSpill > 0;
+
+  // ── Render ──
+  upd('res-pensionable', fmt$(pensionable));
+  upd('res-bc-prap',     fmt$(bc_prap));
+  upd('res-vac-cr',      fmt$(vacCr));
+  upd('res-total-prap',  fmt$(totalPRAP));
+  upd('res-prap-limit-label', `Limit (age ${age}): ${fmt$(limit415)}`);
+  upd('res-rha-spill',   fmt$(rhaSpill));
+  upd('res-prap-cash',   fmt$(prapCash));
+  upd('res-total',       fmt$(totalOut));
+
+  // Style the spill row
+  const spillRow = document.getElementById('spill-row');
+  if (spillRow) {
+    if (rhaSpill === 0) {
+      spillRow.classList.remove('red'); spillRow.classList.add('green');
+    } else {
+      spillRow.classList.remove('green'); spillRow.classList.add('red');
+    }
+  }
+
+  // PRAP cash row
+  document.getElementById('prap-cash-row').style.opacity = prapCash > 0 ? '1' : '0.4';
+
+  // Optimization
+  const optSection = document.getElementById('opt-section');
+  if (canReduce) {
+    optSection.style.display = 'block';
+    upd('res-reduced-spill', fmt$(reducedSpill));
+    upd('res-optimal-k401',  fmt$(optK401Capped));
+  } else {
+    optSection.style.display = 'none';
+  }
+
+  // Update 401k hint
+  document.getElementById('k401-hint').textContent =
+    `Pre-Tax and/or Roth — max ${fmt$(maxK401)} for age ${age}`;
+}
+
+// ── Init ─────────────────────────────────────────────────────────────────────
+(function(){
+  // Set static reference/explainer values directly (no animation needed)
+  function set(id, val) {
+    const el = document.getElementById(id);
+    if (el) el.textContent = val;
+  }
+  set('exp-415c',        fmt$(IRS.c415));
+  set('exp-415c-50',     fmt$(IRS.c415_50));
+  set('exp-415c-6063',   fmt$(IRS.c415_6063));
+  set('exp-comp-cap',    fmt$(IRS.a17));
+  set('exp-rha-limit',   '$' + Math.round(IRS.rhaIncLimit).toLocaleString());
+  set('lim-year',        IRS.year);
+  set('lim-bc',          Math.round(IRS.bc * 100) + '%');
+  set('lim-415c',        fmt$(IRS.c415));
+  set('lim-comp',        fmt$(IRS.a17));
+  set('ref-402g',        fmt$(IRS.g402));
+  set('ref-50plus',      fmt$(IRS.cu50));
+  set('ref-6063',        fmt$(IRS.cu6063));
+  set('ref-max-50',      fmt$(IRS.max401k_50));
+  set('ref-max-6063',    fmt$(IRS.max401k_6063));
+  set('ref-415c',        fmt$(IRS.c415));
+  set('ref-415c-50',     fmt$(IRS.c415_50));
+  set('ref-415c-6063',   fmt$(IRS.c415_6063));
+  set('ref-comp-cap',    fmt$(IRS.a17));
+  set('plan-year-lbl',   IRS.year);
+  set('res-rha-limit-inline', Math.round(IRS.rhaIncLimit).toLocaleString());
+  calculate();
+})();
+</script>
+</body>
+</html>
