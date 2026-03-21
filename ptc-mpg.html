@@ -7,357 +7,160 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root {
-    --navy-deep:   #0b1630;
-    --navy:        #0e1d3e;
-    --navy-mid:    #162050;
-    --navy-light:  #1e2d6b;
-    --blue:        #2b4acb;
-    --blue-med:    #3d63e8;
-    --blue-light:  #4d7ef7;
-    --blue-sky:    #b8d4f5;
-    --blue-sky-bg: #e8f1fd;
-    --gold:        #f5a623;
-    --gold-dark:   #c07d00;
-    --white:       #ffffff;
-    --off-white:   #f2f5fc;
-    --text-dark:   #0e1d3e;
-    --text-mid:    #334477;
-    --text-muted:  #6680aa;
-    --text-light:  #99aac8;
-    --border:      #d0daf0;
-    --border-mid:  #b8c8e8;
-    --input-bg:    #f8faff;
-    --green:       #1a7a3c;
-    --green-bg:    #e6f5ec;
-    --green-border:#5cb87a;
-    --radius-sm:   4px;
-    --radius:      8px;
-    --radius-lg:   12px;
-    --shadow-card: 0 1px 3px rgba(14,29,62,0.08), 0 4px 16px rgba(14,29,62,0.06);
+    --navy-deep:  #0b1630;
+    --navy:       #0e1d3e;
+    --navy-mid:   #162050;
+    --navy-light: #1e2d6b;
+    --blue:       #2b4acb;
+    --blue-med:   #3d63e8;
+    --blue-light: #4d7ef7;
+    --blue-sky:   #b8d4f5;
+    --blue-bg:    #e8f1fd;
+    --gold:       #f5a623;
+    --white:      #ffffff;
+    --off-white:  #f2f5fc;
+    --text-dark:  #0e1d3e;
+    --text-mid:   #334477;
+    --text-muted: #6680aa;
+    --text-light: #99aac8;
+    --border:     #d0daf0;
+    --border-mid: #b8c8e8;
+    --input-bg:   #f8faff;
+    --green:      #1a7a3c;
+    --green-bg:   #e6f5ec;
+    --green-bdr:  #5cb87a;
+    --amber:      #b86a00;
+    --amber-bg:   #fff3e0;
+    --amber-bdr:  #f5a623;
+    --trv-hd:     #f5a623;
+    --lcl-hd:     #f5a623;
+    --vec-hd:     #f5a623;
+    --radius-sm:  4px;
+    --radius:     8px;
+    --radius-lg:  12px;
+    --shadow-sm:  0 1px 3px rgba(14,29,62,0.08);
   }
-
   * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--off-white); color: var(--text-dark); font-family: 'Inter', sans-serif; font-size: 14px; min-height: 100vh; padding-bottom: 60px; }
 
-  body {
-    background: var(--off-white);
-    color: var(--text-dark);
-    font-family: 'Inter', sans-serif;
-    font-size: 14px;
-    min-height: 100vh;
-    padding-bottom: 60px;
-  }
+  /* Header */
+  .header { background: var(--navy-deep); padding: 0 28px; height: 58px; display: flex; align-items: center; gap: 16px; }
+  .header-badge { background: var(--gold); color: var(--navy-deep); font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; padding: 4px 10px; border-radius: var(--radius-sm); }
+  .header-sep { width: 1px; height: 20px; background: rgba(255,255,255,.14); }
+  .header-title { color: var(--white); font-size: 15px; font-weight: 600; }
+  .header-ver { margin-left: auto; color: var(--text-light); font-size: 12px; }
+  .back-link { color: var(--blue-sky); font-size: 12px; text-decoration: none; display: flex; align-items: center; gap: 5px; }
+  .back-link:hover { color: var(--white); }
 
-  /* ── Header ────────────────────────────────────── */
-  .header {
-    background: var(--navy-deep);
-    padding: 0 28px;
-    height: 58px;
-    display: flex;
-    align-items: center;
-    gap: 16px;
-  }
-  .header-badge {
-    background: var(--gold);
-    color: var(--navy-deep);
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    padding: 4px 10px;
-    border-radius: var(--radius-sm);
-    flex-shrink: 0;
-  }
-  .header-sep {
-    width: 1px;
-    height: 20px;
-    background: rgba(255,255,255,0.14);
-  }
-  .header-title {
-    color: var(--white);
-    font-size: 15px;
-    font-weight: 600;
-  }
-  .header-ver {
-    margin-left: auto;
-    color: var(--text-light);
-    font-size: 12px;
-  }
-
-  /* ── Banner ────────────────────────────────────── */
-  .banner {
-    background: var(--navy-mid);
-    border-bottom: 3px solid var(--blue-med);
-    padding: 12px 28px;
-  }
-  .banner p {
-    color: var(--blue-sky);
-    font-size: 12.5px;
-    line-height: 1.55;
-  }
+  /* Banner */
+  .banner { background: var(--navy-mid); border-bottom: 3px solid var(--blue-med); padding: 12px 28px; }
+  .banner p { color: var(--blue-sky); font-size: 12.5px; line-height: 1.55; }
   .banner p strong { color: var(--gold); }
 
-  /* ── Page container ────────────────────────────── */
-  .page {
-    max-width: 720px;
-    margin: 0 auto;
-    padding: 28px 20px 0;
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-  }
+  /* Page */
+  .page { max-width: 720px; margin: 0 auto; padding: 28px 20px 0; display: flex; flex-direction: column; gap: 16px; }
 
-  /* ── Card ──────────────────────────────────────── */
-  .card {
-    background: var(--white);
-    border: 1px solid var(--border);
-    border-radius: var(--radius-lg);
-    box-shadow: var(--shadow-card);
-    overflow: hidden;
-  }
-  .card-hd {
-    background: var(--navy);
-    padding: 12px 20px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
-  .step-dot {
-    width: 24px;
-    height: 24px;
-    border-radius: 50%;
-    background: var(--blue-med);
-    color: var(--white);
-    font-size: 11px;
-    font-weight: 700;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-  }
+  /* Card */
+  .card { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius-lg); box-shadow: var(--shadow-sm); overflow: hidden; }
+  .card-hd { background: var(--navy); padding: 12px 20px; display: flex; align-items: center; gap: 10px; }
+  .step-dot { width: 24px; height: 24px; border-radius: 50%; background: var(--blue-med); color: var(--white); font-size: 11px; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
   .step-dot.gold { background: var(--gold); color: var(--navy-deep); }
-  .card-title {
-    color: var(--white);
-    font-size: 14px;
-    font-weight: 600;
-  }
-  .card-bd {
-    padding: 20px;
-  }
+  .card-title { color: var(--white); font-size: 14px; font-weight: 600; }
+  .card-bd { padding: 20px; }
 
-  /* ── Inner section label ───────────────────────── */
-  .sec {
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 0.07em;
-    text-transform: uppercase;
-    color: var(--blue);
-    padding-bottom: 9px;
-    border-bottom: 1px solid var(--border);
-    margin-bottom: 14px;
-    margin-top: 18px;
-  }
+  /* Section labels */
+  .sec { font-size: 11px; font-weight: 700; letter-spacing: .07em; text-transform: uppercase; color: var(--blue); padding-bottom: 9px; border-bottom: 1px solid var(--border); margin-bottom: 14px; margin-top: 18px; }
   .sec:first-child { margin-top: 0; }
 
-  /* ── Grid helpers ──────────────────────────────── */
+  /* Grids */
   .g2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
   .g3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; }
 
-  /* ── Fields ────────────────────────────────────── */
+  /* Fields */
   .field { display: flex; flex-direction: column; gap: 5px; }
-  .lbl {
-    font-size: 11px;
-    font-weight: 600;
-    color: var(--text-muted);
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
-  }
-  .hint {
-    font-size: 11px;
-    color: var(--text-light);
-    line-height: 1.4;
-    margin-top: 2px;
-  }
+  .lbl { font-size: 11px; font-weight: 600; color: var(--text-muted); letter-spacing: .05em; text-transform: uppercase; }
+  .hint { font-size: 11px; color: var(--text-light); line-height: 1.4; margin-top: 2px; }
 
-  input[type="number"], select {
-    background: var(--input-bg);
-    border: 1px solid var(--border-mid);
-    color: var(--text-dark);
-    font-family: 'Inter', sans-serif;
-    font-size: 14px;
-    font-weight: 500;
-    padding: 9px 12px;
-    border-radius: var(--radius);
-    width: 100%;
-    outline: none;
-    -webkit-appearance: none;
-    appearance: none;
-    transition: border-color 0.14s, box-shadow 0.14s;
-  }
-  input[type="number"]:focus, select:focus {
-    border-color: var(--blue-light);
-    box-shadow: 0 0 0 3px rgba(77,126,247,0.16);
-  }
+  input[type="number"], select { background: var(--input-bg); border: 1px solid var(--border-mid); color: var(--text-dark); font-family: 'Inter', sans-serif; font-size: 14px; font-weight: 500; padding: 9px 12px; border-radius: var(--radius); width: 100%; outline: none; -webkit-appearance: none; appearance: none; transition: border-color .14s, box-shadow .14s; }
+  input[type="number"]:focus, select:focus { border-color: var(--blue-light); box-shadow: 0 0 0 3px rgba(77,126,247,.16); }
   input[type="number"]::-webkit-inner-spin-button { -webkit-appearance: none; }
-  select {
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='11' height='7'%3E%3Cpath fill='%236680aa' d='M1 1l4.5 4.5L10 1'/%3E%3C/svg%3E");
-    background-repeat: no-repeat;
-    background-position: right 12px center;
-    padding-right: 32px;
-    cursor: pointer;
-  }
+  select { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='11' height='7'%3E%3Cpath fill='%236680aa' d='M1 1l4.5 4.5L10 1'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 12px center; padding-right: 32px; cursor: pointer; }
 
-  /* ── Bid period info strip ─────────────────────── */
-  .bp-strip {
-    display: flex;
-    background: var(--navy-mid);
-    border-radius: var(--radius);
-    overflow: hidden;
-    height: 100%;
-    min-height: 48px;
-    align-items: stretch;
-  }
-  .bp-cell {
-    flex: 1;
-    padding: 9px 14px;
-    border-right: 1px solid rgba(255,255,255,0.07);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-  }
+  /* Bid period strip */
+  .bp-strip { display: flex; background: var(--navy-mid); border-radius: var(--radius); overflow: hidden; min-height: 48px; }
+  .bp-cell { flex: 1; padding: 9px 14px; border-right: 1px solid rgba(255,255,255,.07); display: flex; flex-direction: column; justify-content: center; }
   .bp-cell:last-child { border-right: none; }
-  .bp-lbl { font-size: 9px; font-weight: 700; letter-spacing: 0.09em; text-transform: uppercase; color: var(--text-light); margin-bottom: 3px; }
+  .bp-lbl { font-size: 9px; font-weight: 700; letter-spacing: .09em; text-transform: uppercase; color: var(--text-light); margin-bottom: 3px; }
   .bp-val { font-size: 13px; font-weight: 700; color: var(--gold); }
 
-  /* ── Info callout ──────────────────────────────── */
-  .callout {
-    background: var(--blue-sky-bg);
-    border-left: 3px solid var(--blue-light);
-    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
-    padding: 10px 14px;
-    font-size: 12px;
-    color: var(--text-mid);
-    line-height: 1.6;
-  }
+  /* Callout */
+  .callout { background: var(--blue-bg); border-left: 3px solid var(--blue-light); border-radius: 0 var(--radius-sm) var(--radius-sm) 0; padding: 10px 14px; font-size: 12px; color: var(--text-mid); line-height: 1.6; }
   .callout strong { color: var(--blue); }
 
-  /* ── Toggle row ────────────────────────────────── */
-  .toggle-row {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 11px 0;
-    border-bottom: 1px solid var(--border);
-  }
+  /* Toggle */
+  .toggle-row { display: flex; align-items: center; justify-content: space-between; padding: 11px 0; border-bottom: 1px solid var(--border); }
   .toggle-row:last-child { border-bottom: none; padding-bottom: 0; }
   .toggle-row:first-child { padding-top: 0; }
-  .tg-text  { font-size: 13px; font-weight: 500; color: var(--text-dark); }
-  .tg-sub   { font-size: 11px; color: var(--text-muted); margin-top: 2px; }
-  .tg-btns  { display: flex; gap: 4px; }
-  .tbtn {
-    background: var(--input-bg);
-    border: 1px solid var(--border-mid);
-    color: var(--text-muted);
-    font-size: 12px;
-    font-weight: 600;
-    padding: 5px 15px;
-    border-radius: var(--radius-sm);
-    cursor: pointer;
-    transition: all 0.12s;
-  }
-  .tbtn.on {
-    background: var(--blue);
-    border-color: var(--blue);
-    color: var(--white);
-  }
+  .tg-text { font-size: 13px; font-weight: 500; color: var(--text-dark); }
+  .tg-sub { font-size: 11px; color: var(--text-muted); margin-top: 2px; }
+  .tg-btns { display: flex; gap: 4px; }
+  .tbtn { background: var(--input-bg); border: 1px solid var(--border-mid); color: var(--text-muted); font-size: 12px; font-weight: 600; padding: 5px 15px; border-radius: var(--radius-sm); cursor: pointer; transition: all .12s; }
+  .tbtn.on { background: var(--blue); border-color: var(--blue); color: var(--white); }
   .tbtn:hover:not(.on) { border-color: var(--blue-light); color: var(--blue); }
 
-  /* ── Results ───────────────────────────────────── */
-  .r-split {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 12px;
-    margin-bottom: 14px;
+  /* ── Results ── */
+  /* Lineholder section */
+  .res-section { margin-bottom: 16px; }
+  .res-section-hd {
+    display: flex; align-items: center; gap: 10px;
+    padding: 9px 14px;
+    border-radius: var(--radius) var(--radius) 0 0;
+    font-size: 12px; font-weight: 700; letter-spacing: .05em; text-transform: uppercase;
   }
-  .r-group {
-    background: var(--off-white);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    overflow: hidden;
-  }
-  .r-group-hd {
-    background: var(--navy-light);
-    padding: 8px 13px;
-    font-size: 10px;
-    font-weight: 700;
-    letter-spacing: 0.07em;
-    text-transform: uppercase;
-    color: var(--blue-sky);
-  }
-  .r-group-bd {
-    padding: 10px;
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-  }
+  .res-section-hd.lineholder { background: var(--navy); color: var(--blue-sky); }
+  .res-section-hd.trv   { background: var(--gold); color: var(--navy-deep); }
+  .res-section-hd.lcl   { background: var(--gold); color: var(--navy-deep); }
+  .res-section-hd.vec   { background: var(--gold); color: var(--navy-deep); }
+  .res-section-body { background: var(--off-white); border: 1px solid var(--border); border-top: none; border-radius: 0 0 var(--radius) var(--radius); padding: 10px; display: flex; flex-direction: column; gap: 6px; }
 
-  .rrow {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 8px 10px;
-    background: var(--white);
-    border: 1px solid var(--border);
-    border-radius: var(--radius-sm);
-  }
+  .r-split { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .r-group { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius-sm); overflow: hidden; }
+  .r-group-hd { background: var(--navy-light); padding: 7px 12px; font-size: 10px; font-weight: 700; letter-spacing: .07em; text-transform: uppercase; color: var(--blue-sky); }
+  .r-group-bd { padding: 8px; display: flex; flex-direction: column; gap: 5px; }
+
+  .rrow { display: flex; align-items: center; justify-content: space-between; padding: 7px 10px; background: var(--white); border: 1px solid var(--border); border-radius: var(--radius-sm); }
   .rrow.navy  { background: var(--navy); border-color: var(--navy); }
   .rrow.navy .rl { color: var(--blue-sky); }
   .rrow.navy .rv { color: var(--gold); font-size: 17px; }
-
-  .rrow.green { background: var(--green-bg); border-color: var(--green-border); }
+  .rrow.green { background: var(--green-bg); border-color: var(--green-bdr); }
   .rrow.green .rl { color: var(--green); font-weight: 600; }
   .rrow.green .rv { color: var(--green); }
+  .rrow.amber { background: var(--amber-bg); border-color: var(--amber-bdr); }
+  .rrow.amber .rl { color: var(--amber); font-weight: 500; }
+  .rrow.full { margin: 0; }
 
   .rl { font-size: 12px; font-weight: 500; color: var(--text-mid); flex: 1; }
   .rr { text-align: right; flex-shrink: 0; }
   .rv { font-size: 15px; font-weight: 700; color: var(--text-dark); font-variant-numeric: tabular-nums; }
   .rs { font-size: 10px; color: var(--text-light); margin-top: 2px; }
 
-  .badge {
-    display: inline-block;
-    font-size: 10px;
-    font-weight: 700;
-    letter-spacing: 0.04em;
-    padding: 2px 8px;
-    border-radius: 10px;
-    margin-left: 6px;
-    background: var(--gold);
-    color: var(--navy-deep);
-  }
+  .badge { display: inline-block; font-size: 10px; font-weight: 700; letter-spacing: .04em; padding: 2px 8px; border-radius: 10px; margin-left: 6px; background: var(--gold); color: var(--navy-deep); }
 
-  .hr { border: none; border-top: 1px solid var(--border); margin: 14px 0; }
+  .hr { border: none; border-top: 1px solid var(--border); margin: 12px 0; }
 
-  /* reserve section toggle */
+  /* Reserve hidden fields */
   #vecSection { display: none; flex-direction: column; gap: 14px; padding-top: 4px; }
 
-  /* disclaimer */
-  .disc {
-    background: var(--navy-mid);
-    border-radius: var(--radius);
-    padding: 12px 16px;
-    font-size: 11px;
-    color: var(--text-light);
-    line-height: 1.65;
-  }
+  /* Disclaimer */
+  .disc { background: var(--navy-mid); border-radius: var(--radius); padding: 12px 16px; font-size: 11px; color: var(--text-light); line-height: 1.65; }
 
-  /* flash animation */
   .flash { animation: fsh .35s ease; }
   @keyframes fsh { 0%{opacity:.3} 100%{opacity:1} }
 
   @media (max-width: 580px) {
     .g2, .g3, .r-split { grid-template-columns: 1fr; }
-    .header { padding: 0 16px; }
+    .header, .banner { padding-left: 16px; padding-right: 16px; }
     .page { padding: 16px 12px 0; }
-    .banner { padding: 10px 16px; }
   }
 </style>
 </head>
@@ -367,21 +170,18 @@
   <div class="header-badge">UAL ALPA</div>
   <div class="header-sep"></div>
   <div class="header-title">PTC / MPG Pay Calculator</div>
-  <div class="header-ver">Pre-PBS · v7.4</div>
+  <a class="back-link" href="index.html">← All Tools</a>
 </div>
 
 <div class="banner">
-  <p><strong>Note:</strong> Lineholders are paid the higher of PTC or LPV. Reserve pilots are paid the higher of MPG or LPV. These are pre-PBS estimates — final pay is governed by the UPA.</p>
+  <p><strong>Note:</strong> Lineholders are paid the higher of PTC or LPV. Reserve pilots are paid the higher of MPG or LPV. All four line types are shown below. Final pay is governed by the UPA.</p>
 </div>
 
 <div class="page">
 
   <!-- ① Bid Period -->
   <div class="card">
-    <div class="card-hd">
-      <div class="step-dot">1</div>
-      <div class="card-title">Bid Period</div>
-    </div>
+    <div class="card-hd"><div class="step-dot">1</div><div class="card-title">Bid Period</div></div>
     <div class="card-bd">
       <div class="g2" style="align-items:end;">
         <div class="field">
@@ -399,252 +199,184 @@
 
   <!-- ② Carry-In & PBS Floors -->
   <div class="card">
-    <div class="card-hd">
-      <div class="step-dot">2</div>
-      <div class="card-title">Carry-In &amp; PBS Floors</div>
-    </div>
+    <div class="card-hd"><div class="step-dot">2</div><div class="card-title">Carry-In &amp; PBS Floors</div></div>
     <div class="card-bd">
-
       <div class="sec">Carry-In Credit</div>
       <div class="g3">
-        <div class="field">
-          <div class="lbl">Hours</div>
-          <input type="number" id="carryInHrs" min="0" max="99" value="0" oninput="calculate()">
-        </div>
-        <div class="field">
-          <div class="lbl">Minutes</div>
-          <input type="number" id="carryInMins" min="0" max="59" value="0" oninput="calculate()">
-        </div>
-        <div class="field">
-          <div class="lbl">Carry-In Days</div>
-          <input type="number" id="carryInDays" min="0" max="10" value="0" oninput="calculate()">
-        </div>
+        <div class="field"><div class="lbl">Hours</div><input type="number" id="carryInHrs" min="0" max="99" value="0" oninput="calculate()"></div>
+        <div class="field"><div class="lbl">Minutes</div><input type="number" id="carryInMins" min="0" max="59" value="0" oninput="calculate()"></div>
+        <div class="field"><div class="lbl">Carry-In Days</div><input type="number" id="carryInDays" min="0" max="10" value="0" oninput="calculate()"></div>
       </div>
-
       <div class="sec">Line Construction Floor (LCF)</div>
       <div class="g2">
-        <div class="field">
-          <div class="lbl">Hours</div>
-          <input type="number" id="lcfHrs" min="0" max="100" value="67" oninput="calculate()">
-          <div class="hint">Min guaranteed flying from PBS</div>
-        </div>
-        <div class="field">
-          <div class="lbl">Minutes</div>
-          <input type="number" id="lcfMins" min="0" max="59" value="0" oninput="calculate()">
-        </div>
+        <div class="field"><div class="lbl">Hours</div><input type="number" id="lcfHrs" min="0" max="100" value="67" oninput="calculate()"><div class="hint">Min guaranteed flying from PBS</div></div>
+        <div class="field"><div class="lbl">Minutes</div><input type="number" id="lcfMins" min="0" max="59" value="0" oninput="calculate()"></div>
       </div>
-
       <div class="sec">Line Construction Ceiling (LCC)</div>
       <div class="g2">
-        <div class="field">
-          <div class="lbl">Hours</div>
-          <input type="number" id="lccHrs" min="0" max="100" value="83" oninput="calculate()">
-          <div class="hint">Max flying PBS can award</div>
-        </div>
-        <div class="field">
-          <div class="lbl">Minutes</div>
-          <input type="number" id="lccMins" min="0" max="59" value="0" oninput="calculate()">
-        </div>
+        <div class="field"><div class="lbl">Hours</div><input type="number" id="lccHrs" min="0" max="100" value="83" oninput="calculate()"><div class="hint">Max flying PBS can award</div></div>
+        <div class="field"><div class="lbl">Minutes</div><input type="number" id="lccMins" min="0" max="59" value="0" oninput="calculate()"></div>
       </div>
-
     </div>
   </div>
 
   <!-- ③ Pre-Blocked Absences -->
   <div class="card">
-    <div class="card-hd">
-      <div class="step-dot">3</div>
-      <div class="card-title">Pre-Blocked Absences</div>
-    </div>
+    <div class="card-hd"><div class="step-dot">3</div><div class="card-title">Pre-Blocked Absences</div></div>
     <div class="card-bd">
-
       <div class="sec">Vacation</div>
       <div class="g2">
-        <div class="field">
-          <div class="lbl">Vacation Days</div>
-          <input type="number" id="vacDays" min="0" max="31" value="0" oninput="calculate()">
-        </div>
+        <div class="field"><div class="lbl">Vacation Days</div><input type="number" id="vacDays" min="0" max="31" value="0" oninput="calculate()"></div>
       </div>
-
       <div class="sec">Training</div>
       <div class="g2">
-        <div class="field">
-          <div class="lbl">Short-Course Days</div>
-          <input type="number" id="shortTrn" min="0" max="10" value="0" oninput="calculate()">
-          <div class="hint">Less than 5 days — 3-E-1-a/b</div>
-        </div>
-        <div class="field">
-          <div class="lbl">Long-Course Days</div>
-          <input type="number" id="longTrn" min="0" max="21" value="0" oninput="calculate()">
-          <div class="hint">5+ days incl. OEB — 3-E-1-c</div>
-        </div>
+        <div class="field"><div class="lbl">Short-Course Days</div><input type="number" id="shortTrn" min="0" max="10" value="0" oninput="calculate()"><div class="hint">Less than 5 days — 3-E-1-a/b</div></div>
+        <div class="field"><div class="lbl">Long-Course Days</div><input type="number" id="longTrn" min="0" max="21" value="0" oninput="calculate()"><div class="hint">5+ days incl. OEB — 3-E-1-c</div></div>
       </div>
-
       <div class="sec">Other</div>
       <div class="g2">
-        <div class="field">
-          <div class="lbl">Transfer / Paid Move Days</div>
-          <input type="number" id="moveDays" min="0" max="10" value="0" oninput="calculate()">
-        </div>
-        <div class="field">
-          <div class="lbl">Unpaid Absence Days (FMLA, COLA)</div>
-          <input type="number" id="unpaidDays" min="0" max="31" value="0" oninput="calculate()">
-        </div>
-        <div class="field">
-          <div class="lbl">Pre-Blocked Sick Days</div>
-          <input type="number" id="sickDays" min="0" max="31" value="0" oninput="calculate()">
-        </div>
-        <div class="field">
-          <div class="lbl">Paid Absence Days (Jury Duty, etc.)</div>
-          <input type="number" id="paidAbsDays" min="0" max="31" value="0" oninput="calculate()">
-        </div>
-        <div class="field">
-          <div class="lbl">UBP ALPA Business Days (Paid)</div>
-          <input type="number" id="ubpDays" min="0" max="17" value="0" oninput="calculate()">
-        </div>
-        <div class="field">
-          <div class="lbl">Company Business Days (5:30/day)</div>
-          <input type="number" id="cbDays" min="0" max="10" value="0" oninput="calculate()">
-        </div>
+        <div class="field"><div class="lbl">Transfer / Paid Move Days</div><input type="number" id="moveDays" min="0" max="10" value="0" oninput="calculate()"></div>
+        <div class="field"><div class="lbl">Unpaid Absence Days (FMLA, COLA)</div><input type="number" id="unpaidDays" min="0" max="31" value="0" oninput="calculate()"></div>
+        <div class="field"><div class="lbl">Pre-Blocked Sick Days</div><input type="number" id="sickDays" min="0" max="31" value="0" oninput="calculate()"></div>
+        <div class="field"><div class="lbl">Paid Absence Days (Jury Duty, etc.)</div><input type="number" id="paidAbsDays" min="0" max="31" value="0" oninput="calculate()"></div>
+        <div class="field"><div class="lbl">UBP ALPA Business Days (Paid)</div><input type="number" id="ubpDays" min="0" max="17" value="0" oninput="calculate()"></div>
+        <div class="field"><div class="lbl">Company Business Days (5:30/day)</div><input type="number" id="cbDays" min="0" max="10" value="0" oninput="calculate()"></div>
       </div>
-
     </div>
   </div>
 
-  <!-- ④ Line Type & Reserve -->
+  <!-- ④ Reserve Options -->
   <div class="card">
-    <div class="card-hd">
-      <div class="step-dot">4</div>
-      <div class="card-title">Line Type &amp; Reserve</div>
-    </div>
+    <div class="card-hd"><div class="step-dot">4</div><div class="card-title">Reserve Options</div></div>
     <div class="card-bd">
-
-      <div class="field" style="max-width:360px;">
-        <div class="lbl">Reserve Line Type Offered in Your Category</div>
-        <select id="reserveType" onchange="toggleReserve(); calculate();">
-          <option value="Neither">Neither (Lineholder)</option>
-          <option value="VEC">VEC — Voluntary Early Check-In</option>
-          <option value="VSC">VSC — Voluntary Short Call</option>
-        </select>
-      </div>
-
-      <div id="vecSection">
-        <div class="callout">
-          <strong>Reserve line selected.</strong> MPG is calculated from awarded reserve days × daily credit. VEC/VSC lines add additional per-day credit on top of base MPG.
-        </div>
-        <div class="field" style="max-width:240px;">
-          <div class="lbl">Reserve Blocks in Bid Period (VEC)</div>
-          <input type="number" id="reserveBlocks" min="0" max="10" value="3" oninput="calculate()">
-        </div>
-        <hr class="hr" style="margin:2px 0 6px;">
-        <div class="toggle-row">
-          <div>
-            <div class="tg-text">Add Extra Reserve Day?</div>
-            <div class="tg-sub">With LPA above 77 — 5-E-5-d</div>
-          </div>
-          <div class="tg-btns">
-            <button class="tbtn" id="extraDayNo"  onclick="setTgl('extraDay','No')">No</button>
-            <button class="tbtn on" id="extraDayYes" onclick="setTgl('extraDay','Yes')">Yes</button>
-          </div>
-        </div>
-        <div class="toggle-row">
-          <div>
-            <div class="tg-text">Additional Day Off?</div>
-            <div class="tg-sub">20-K-1-f-(2)-(e)</div>
-          </div>
-          <div class="tg-btns">
-            <button class="tbtn" id="addDayOffNo"  onclick="setTgl('addDayOff','No')">No</button>
-            <button class="tbtn on" id="addDayOffYes" onclick="setTgl('addDayOff','Yes')">Yes</button>
-          </div>
+      <div class="callout"><strong>All four line type results are always shown below.</strong> Use these inputs to refine the VEC-specific calculations.</div>
+      <div style="height:14px;"></div>
+      <div class="toggle-row">
+        <div><div class="tg-text">Extra Reserve Day? (LPA above 77)</div><div class="tg-sub">5-E-5-d — adds 1 reserve day to TRV/LCL</div></div>
+        <div class="tg-btns">
+          <button class="tbtn" id="extraDayNo" onclick="setTgl('extraDay','No')">No</button>
+          <button class="tbtn on" id="extraDayYes" onclick="setTgl('extraDay','Yes')">Yes</button>
         </div>
       </div>
-
+      <div class="toggle-row">
+        <div><div class="tg-text">Additional Day Off? (VEC line)</div><div class="tg-sub">20-K-1-f-(2)-(e) — removes 1 VEC reserve day</div></div>
+        <div class="tg-btns">
+          <button class="tbtn" id="addDayOffNo" onclick="setTgl('addDayOff','No')">No</button>
+          <button class="tbtn on" id="addDayOffYes" onclick="setTgl('addDayOff','Yes')">Yes</button>
+        </div>
+      </div>
+      <div class="toggle-row" style="border-bottom:none;">
+        <div><div class="tg-text">VEC Reserve Blocks in Bid Period</div><div class="tg-sub">Number of reserve blocks awarded on a VEC line</div></div>
+        <div style="width:80px;"><input type="number" id="reserveBlocks" min="0" max="10" value="3" oninput="calculate()"></div>
+      </div>
     </div>
   </div>
 
   <!-- ⑤ Results -->
   <div class="card">
-    <div class="card-hd">
-      <div class="step-dot gold">✓</div>
-      <div class="card-title">Results</div>
-    </div>
+    <div class="card-hd"><div class="step-dot gold">✓</div><div class="card-title">Results</div></div>
     <div class="card-bd">
 
-      <div class="rrow navy" style="margin-bottom:14px;">
-        <div class="rl">Available Days for PBS Flying</div>
-        <div class="rr"><div class="rv" id="res-avail-days">—</div></div>
+      <!-- Available days -->
+      <div class="rrow navy" style="margin-bottom:16px;">
+        <div class="rl">Available Days for PBS / Reserve</div>
+        <div class="rr"><div class="rv" id="res-avail-days">—</div><div class="rs">bid period days minus all absences</div></div>
       </div>
 
-      <div class="r-split">
-        <div class="r-group">
-          <div class="r-group-hd">At LCF — Minimum Award</div>
-          <div class="r-group-bd">
-            <div class="rrow">
-              <div class="rl">Flying Required</div>
-              <div class="rr"><div class="rv" id="res-min-flying">—</div></div>
+      <!-- LINEHOLDER -->
+      <div class="res-section">
+        <div class="res-section-hd lineholder">✈ Lineholder</div>
+        <div class="res-section-body">
+          <div class="rrow amber">
+            <div class="rl">Minimum days off (lineholder)</div>
+            <div class="rr"><div class="rv" id="lh-mdo">—</div></div>
+          </div>
+          <div class="r-split">
+            <div class="r-group">
+              <div class="r-group-hd">At LCF — Minimum Award</div>
+              <div class="r-group-bd">
+                <div class="rrow"><div class="rl">Min additional flying</div><div class="rr"><div class="rv" id="lh-min-flying">—</div></div></div>
+                <div class="rrow"><div class="rl">LPV</div><div class="rr"><div class="rv" id="lh-min-lpv">—</div></div></div>
+                <div class="rrow"><div class="rl">PTC</div><div class="rr"><div class="rv" id="lh-min-ptc">—</div></div></div>
+              </div>
             </div>
-            <div class="rrow">
-              <div class="rl">LPV</div>
-              <div class="rr"><div class="rv" id="res-min-lpv">—</div></div>
-            </div>
-            <div class="rrow">
-              <div class="rl">PTC</div>
-              <div class="rr"><div class="rv" id="res-ptc-min">—</div></div>
+            <div class="r-group">
+              <div class="r-group-hd">At LCC — Maximum Award</div>
+              <div class="r-group-bd">
+                <div class="rrow"><div class="rl">Max additional flying</div><div class="rr"><div class="rv" id="lh-max-flying">—</div></div></div>
+                <div class="rrow"><div class="rl">LPV</div><div class="rr"><div class="rv" id="lh-max-lpv">—</div></div></div>
+                <div class="rrow"><div class="rl">PTC</div><div class="rr"><div class="rv" id="lh-max-ptc">—</div></div></div>
+              </div>
             </div>
           </div>
-        </div>
-        <div class="r-group">
-          <div class="r-group-hd">At LCC — Maximum Award</div>
-          <div class="r-group-bd">
-            <div class="rrow">
-              <div class="rl">Flying Possible</div>
-              <div class="rr"><div class="rv" id="res-max-flying">—</div></div>
-            </div>
-            <div class="rrow">
-              <div class="rl">LPV</div>
-              <div class="rr"><div class="rv" id="res-max-lpv">—</div></div>
-            </div>
-            <div class="rrow">
-              <div class="rl">PTC</div>
-              <div class="rr"><div class="rv" id="res-ptc-max">—</div></div>
-            </div>
+          <div class="rrow green">
+            <div class="rl">You will be paid (min scenario) <span class="badge" id="lh-badge-min"></span></div>
+            <div class="rr"><div class="rv" id="lh-paid-min">—</div><div class="rs" id="lh-paid-min-sub"></div></div>
+          </div>
+          <div class="rrow green">
+            <div class="rl">You will be paid (max scenario) <span class="badge" id="lh-badge-max"></span></div>
+            <div class="rr"><div class="rv" id="lh-paid-max">—</div><div class="rs" id="lh-paid-max-sub"></div></div>
           </div>
         </div>
       </div>
 
-      <div class="rrow" style="margin-bottom:8px;">
-        <div class="rl">MPG (Minimum Pay Guarantee)</div>
-        <div class="rr">
-          <div class="rv" id="res-mpg">—</div>
-          <div class="rs" id="res-mpg-sub"></div>
+      <!-- TRV -->
+      <div class="res-section">
+        <div class="res-section-hd trv">📋 Traditional Reserve Line (TRV)</div>
+        <div class="res-section-body">
+          <div class="r-split">
+            <div class="rrow"><div class="rl">Reserve days awarded</div><div class="rr"><div class="rv" id="trv-days">—</div></div></div>
+            <div class="rrow"><div class="rl">HDOs awarded (Global)</div><div class="rr"><div class="rv" id="trv-hdos">—</div></div></div>
+          </div>
+          <div class="rrow"><div class="rl">Reserve holder MPG</div><div class="rr"><div class="rv" id="trv-mpg">—</div></div></div>
+          <div class="rrow green">
+            <div class="rl">Your minimum pay as a reserve</div>
+            <div class="rr"><div class="rv" id="trv-min-pay">—</div><div class="rs" id="trv-min-pay-sub"></div></div>
+          </div>
+          <div class="rrow amber">
+            <div class="rl">Max Short Calls that can be assigned</div>
+            <div class="rr"><div class="rv" id="trv-sc">—</div><div class="rs">All unused SCs increase MPG by 1 hr</div></div>
+          </div>
         </div>
       </div>
 
-      <div class="rrow" style="margin-bottom:14px;">
-        <div class="rl">Pick-Up Dead Band <span style="font-size:11px; font-weight:400; color:var(--text-light);">(first trips won't raise pay)</span></div>
-        <div class="rr"><div class="rv" id="res-deadband">—</div></div>
+      <!-- LCL -->
+      <div class="res-section">
+        <div class="res-section-hd lcl">📋 Long Call Line Reserve (LCL)</div>
+        <div class="res-section-body">
+          <div class="r-split">
+            <div class="rrow"><div class="rl">Reserve days awarded</div><div class="rr"><div class="rv" id="lcl-days">—</div></div></div>
+            <div class="rrow"><div class="rl">HDOs awarded (Global)</div><div class="rr"><div class="rv" id="lcl-hdos">—</div></div></div>
+          </div>
+          <div class="rrow"><div class="rl">Reserve holder MPG</div><div class="rr"><div class="rv" id="lcl-mpg">—</div></div></div>
+          <div class="rrow green">
+            <div class="rl">Your minimum pay as a reserve</div>
+            <div class="rr"><div class="rv" id="lcl-min-pay">—</div><div class="rs" id="lcl-min-pay-sub"></div></div>
+          </div>
+          <div class="rrow amber">
+            <div class="rl">Max Short Calls that can be assigned</div>
+            <div class="rr"><div class="rv" id="lcl-sc">—</div><div class="rs">LCL: 0 short calls</div></div>
+          </div>
+        </div>
       </div>
 
-      <hr class="hr">
-
-      <div class="rrow green" style="margin-bottom:8px;">
-        <div class="rl">
-          You Will Be Paid — Min Scenario
-          <span class="badge" id="badge-min"></span>
-        </div>
-        <div class="rr">
-          <div class="rv" id="res-paid-min">—</div>
-          <div class="rs" id="res-paid-min-sub"></div>
-        </div>
-      </div>
-      <div class="rrow green">
-        <div class="rl">
-          You Will Be Paid — Max Scenario
-          <span class="badge" id="badge-max"></span>
-        </div>
-        <div class="rr">
-          <div class="rv" id="res-paid-max">—</div>
-          <div class="rs" id="res-paid-max-sub"></div>
+      <!-- VEC -->
+      <div class="res-section" style="margin-bottom:0;">
+        <div class="res-section-hd vec">📋 Voluntary Early Check Line (VEC)</div>
+        <div class="res-section-body">
+          <div class="r-split">
+            <div class="rrow"><div class="rl">Reserve days awarded</div><div class="rr"><div class="rv" id="vec-days">—</div></div></div>
+            <div class="rrow"><div class="rl">HDOs awarded (Global)</div><div class="rr"><div class="rv" id="vec-hdos">—</div></div></div>
+          </div>
+          <div class="rrow"><div class="rl">Reserve holder MPG</div><div class="rr"><div class="rv" id="vec-mpg">—</div></div></div>
+          <div class="rrow green">
+            <div class="rl">Your minimum pay as a reserve</div>
+            <div class="rr"><div class="rv" id="vec-min-pay">—</div><div class="rs" id="vec-min-pay-sub"></div></div>
+          </div>
+          <div class="rrow amber">
+            <div class="rl">Short calls</div>
+            <div class="rr"><div class="rv">No limit</div><div class="rs">All unused SCs increase MPG by 1 hr</div></div>
+          </div>
         </div>
       </div>
 
@@ -652,50 +384,168 @@
   </div>
 
   <div class="disc">
-    ⚠ This calculator is a planning aid only. Your actual pay is determined per the UAL–ALPA Pilot Agreement and not this tool. Results cannot be used to support a grievance or pay claim. Verify against your pay register and contact your local ALPA representative for official guidance.
+    ⚠ This calculator is a planning aid only. Your actual pay is determined per the UAL–ALPA Pilot Agreement. Results cannot be used to support a grievance or pay claim. Verify against your pay register and contact your local ALPA representative for official guidance.
   </div>
 
-</div><!-- /page -->
+</div>
 
 <script>
+// ── Bid period data ──────────────────────────────────────────────────────────
+// Credit rates per UPA:
+//  vacCr = vacation credit per day (hrs)
+//  scTrn = short course training credit per day (5:00)
+//  lcTrn = long course training credit per day (2:20 = Data!N6 = 2.333)
+//  moveCr = transfer/paid move (5:15 = Data!N12)
+//  sickCr = sick/paid absence credit (3:00 = Data!N3)
+//  paidAbsCr = paid absence like jury duty (2:48 = Data!N2 for older, varies)
+//  ubpCr = UBP ALPA paid business (3:00 = Data!N3)
+//  cbCr = company business (5:30 = Data!N13)
+//  cbMax = company business max credit (3 days 22hrs = Data!N14 = 94hrs)
+//  RESERVE_DAILY = 4:17:39 = 15459s/3600 = 4.2942 hrs (Data!N7)
+//  LONG_TRN_RESERVE = 2:20 = Data!N6 = 2.3333 hrs (long course for reserve MPG)
+
+const RESERVE_DAILY = 15459 / 3600;  // ~4:17:39 per day
+const LONG_TRN_RES  = 2 + 20/60;     // 2:20 per long-course day (Data!N6)
+const VEC_PER_DAY   = 15/60;         // 0:15 per VEC reserve day (V77)
+const CB_MAX        = 3 + 22/60;     // 3 days 22 hrs max CB credit (Data!N14) — actually timedelta 3d+64800s = 3d+18hrs = 90hrs
+
+// Data!N14 = timedelta(days=3, seconds=64800) = 3*24 + 64800/3600 = 72+18 = 90 hrs
+const CB_MAX_HRS = 90;
+
 const BID_PERIODS = [
-  { id:'MAY 2024', start:'May 1, 2024',  end:'May 30, 2024',  days:30, vacCr:3.75, scTrn:5.0, lcTrn:3.117, moveCr:5.25, sickCr:3.0, paidAbsCr:2.8,  ubpCr:3.0, cbCr:5.5, cbMax:92 },
-  { id:'JUN 2024', start:'May 31, 2024', end:'Jun 29, 2024',  days:30, vacCr:3.75, scTrn:5.0, lcTrn:3.117, moveCr:5.25, sickCr:3.0, paidAbsCr:2.8,  ubpCr:3.0, cbCr:5.5, cbMax:92 },
-  { id:'JUL 2024', start:'Jun 30, 2024', end:'Jul 29, 2024',  days:30, vacCr:3.75, scTrn:5.0, lcTrn:3.117, moveCr:5.25, sickCr:3.0, paidAbsCr:2.8,  ubpCr:3.0, cbCr:5.5, cbMax:92 },
-  { id:'AUG 2024', start:'Jul 30, 2024', end:'Aug 28, 2024',  days:30, vacCr:3.75, scTrn:5.0, lcTrn:3.117, moveCr:5.25, sickCr:3.0, paidAbsCr:2.8,  ubpCr:3.0, cbCr:5.5, cbMax:92 },
-  { id:'SEP 2024', start:'Aug 29, 2024', end:'Sep 28, 2024',  days:31, vacCr:3.75, scTrn:5.0, lcTrn:3.117, moveCr:5.25, sickCr:3.0, paidAbsCr:2.333,ubpCr:3.0, cbCr:5.5, cbMax:92 },
-  { id:'OCT 2024', start:'Sep 29, 2024', end:'Oct 29, 2024',  days:31, vacCr:3.75, scTrn:5.0, lcTrn:3.117, moveCr:5.25, sickCr:3.0, paidAbsCr:2.333,ubpCr:3.0, cbCr:5.5, cbMax:92 },
-  { id:'NOV 2024', start:'Oct 30, 2024', end:'Nov 29, 2024',  days:31, vacCr:3.75, scTrn:5.0, lcTrn:3.117, moveCr:5.25, sickCr:3.0, paidAbsCr:2.333,ubpCr:3.0, cbCr:5.5, cbMax:92 },
-  { id:'DEC 2024', start:'Nov 30, 2024', end:'Dec 29, 2024',  days:30, vacCr:3.75, scTrn:5.0, lcTrn:3.117, moveCr:5.25, sickCr:3.0, paidAbsCr:2.8,  ubpCr:3.0, cbCr:5.5, cbMax:92 },
-  { id:'JAN 2025', start:'Dec 30, 2024', end:'Jan 29, 2025',  days:31, vacCr:3.75, scTrn:5.0, lcTrn:3.117, moveCr:5.25, sickCr:3.0, paidAbsCr:3.5,  ubpCr:3.0, cbCr:5.5, cbMax:92 },
-  { id:'FEB 2025', start:'Jan 30, 2025', end:'Mar 1, 2025',   days:31, vacCr:3.75, scTrn:5.0, lcTrn:3.117, moveCr:5.25, sickCr:3.0, paidAbsCr:4.5,  ubpCr:3.0, cbCr:5.5, cbMax:92 },
-  { id:'MAR 2025', start:'Mar 2, 2025',  end:'Mar 31, 2025',  days:30, vacCr:3.75, scTrn:5.0, lcTrn:3.117, moveCr:5.25, sickCr:3.0, paidAbsCr:2.8,  ubpCr:3.0, cbCr:5.5, cbMax:92 },
-  { id:'APR 2025', start:'Apr 1, 2025',  end:'Apr 30, 2025',  days:30, vacCr:3.75, scTrn:5.0, lcTrn:3.117, moveCr:5.25, sickCr:3.0, paidAbsCr:2.8,  ubpCr:3.0, cbCr:5.5, cbMax:92 },
-  { id:'MAY 2025', start:'May 1, 2025',  end:'May 30, 2025',  days:30, vacCr:4.25, scTrn:5.0, lcTrn:3.117, moveCr:5.25, sickCr:3.0, paidAbsCr:2.8,  ubpCr:3.0, cbCr:5.5, cbMax:92 },
-  { id:'JUN 2025', start:'May 31, 2025', end:'Jun 29, 2025',  days:30, vacCr:4.25, scTrn:5.0, lcTrn:3.117, moveCr:5.25, sickCr:3.0, paidAbsCr:2.8,  ubpCr:3.0, cbCr:5.5, cbMax:92 },
-  { id:'JUL 2025', start:'Jun 30, 2025', end:'Jul 29, 2025',  days:30, vacCr:4.25, scTrn:5.0, lcTrn:3.117, moveCr:5.25, sickCr:3.0, paidAbsCr:2.8,  ubpCr:3.0, cbCr:5.5, cbMax:92 },
-  { id:'AUG 2025', start:'Jul 30, 2025', end:'Aug 28, 2025',  days:30, vacCr:4.25, scTrn:5.0, lcTrn:3.117, moveCr:5.25, sickCr:3.0, paidAbsCr:2.8,  ubpCr:3.0, cbCr:5.5, cbMax:92 },
-  { id:'SEP 2025', start:'Aug 29, 2025', end:'Sep 28, 2025',  days:31, vacCr:4.25, scTrn:5.0, lcTrn:3.117, moveCr:5.25, sickCr:3.0, paidAbsCr:2.8,  ubpCr:3.0, cbCr:5.5, cbMax:92 },
-  { id:'OCT 2025', start:'Sep 29, 2025', end:'Oct 29, 2025',  days:31, vacCr:4.25, scTrn:5.0, lcTrn:3.117, moveCr:5.25, sickCr:3.0, paidAbsCr:2.8,  ubpCr:3.0, cbCr:5.5, cbMax:92 },
-  { id:'NOV 2025', start:'Oct 30, 2025', end:'Nov 29, 2025',  days:31, vacCr:4.25, scTrn:5.0, lcTrn:3.117, moveCr:5.25, sickCr:3.0, paidAbsCr:2.8,  ubpCr:3.0, cbCr:5.5, cbMax:92 },
-  { id:'DEC 2025', start:'Nov 30, 2025', end:'Dec 29, 2025',  days:30, vacCr:4.25, scTrn:5.0, lcTrn:3.117, moveCr:5.25, sickCr:3.0, paidAbsCr:2.8,  ubpCr:3.0, cbCr:5.5, cbMax:92 },
-  { id:'JAN 2026', start:'Dec 30, 2025', end:'Jan 29, 2026',  days:31, vacCr:4.25, scTrn:5.0, lcTrn:3.117, moveCr:5.25, sickCr:3.0, paidAbsCr:2.8,  ubpCr:3.0, cbCr:5.5, cbMax:92 },
-  { id:'FEB 2026', start:'Jan 30, 2026', end:'Mar 1, 2026',   days:31, vacCr:4.25, scTrn:5.0, lcTrn:3.117, moveCr:5.25, sickCr:3.0, paidAbsCr:2.8,  ubpCr:3.0, cbCr:5.5, cbMax:92 },
-  { id:'MAR 2026', start:'Mar 2, 2026',  end:'Mar 31, 2026',  days:30, vacCr:4.25, scTrn:5.0, lcTrn:3.117, moveCr:5.25, sickCr:3.0, paidAbsCr:2.8,  ubpCr:3.0, cbCr:5.5, cbMax:92 },
-  { id:'APR 2026', start:'Apr 1, 2026',  end:'Apr 30, 2026',  days:30, vacCr:4.25, scTrn:5.0, lcTrn:3.117, moveCr:5.25, sickCr:3.0, paidAbsCr:2.8,  ubpCr:3.0, cbCr:5.5, cbMax:92 },
-  { id:'MAY 2026', start:'May 1, 2026',  end:'May 30, 2026',  days:30, vacCr:4.25, scTrn:5.0, lcTrn:3.117, moveCr:5.25, sickCr:3.0, paidAbsCr:2.8,  ubpCr:3.0, cbCr:5.5, cbMax:92 },
-  { id:'JUN 2026', start:'May 31, 2026', end:'Jun 29, 2026',  days:30, vacCr:4.25, scTrn:5.0, lcTrn:3.117, moveCr:5.25, sickCr:3.0, paidAbsCr:2.8,  ubpCr:3.0, cbCr:5.5, cbMax:92 },
-  { id:'JUL 2026', start:'Jun 30, 2026', end:'Jul 29, 2026',  days:30, vacCr:4.25, scTrn:5.0, lcTrn:3.117, moveCr:5.25, sickCr:3.0, paidAbsCr:2.8,  ubpCr:3.0, cbCr:5.5, cbMax:92 },
-  { id:'AUG 2026', start:'Jul 30, 2026', end:'Aug 28, 2026',  days:30, vacCr:4.25, scTrn:5.0, lcTrn:3.117, moveCr:5.25, sickCr:3.0, paidAbsCr:2.8,  ubpCr:3.0, cbCr:5.5, cbMax:92 },
-  { id:'SEP 2026', start:'Aug 29, 2026', end:'Sep 28, 2026',  days:31, vacCr:4.25, scTrn:5.0, lcTrn:3.117, moveCr:5.25, sickCr:3.0, paidAbsCr:2.8,  ubpCr:3.0, cbCr:5.5, cbMax:92 },
-  { id:'OCT 2026', start:'Sep 29, 2026', end:'Oct 29, 2026',  days:31, vacCr:4.25, scTrn:5.0, lcTrn:3.117, moveCr:5.25, sickCr:3.0, paidAbsCr:2.8,  ubpCr:3.0, cbCr:5.5, cbMax:92 },
-  { id:'NOV 2026', start:'Oct 30, 2026', end:'Nov 29, 2026',  days:31, vacCr:4.25, scTrn:5.0, lcTrn:3.117, moveCr:5.25, sickCr:3.0, paidAbsCr:2.8,  ubpCr:3.0, cbCr:5.5, cbMax:92 },
-  { id:'DEC 2026', start:'Nov 30, 2026', end:'Dec 29, 2026',  days:30, vacCr:4.25, scTrn:5.0, lcTrn:3.117, moveCr:5.25, sickCr:3.0, paidAbsCr:2.8,  ubpCr:3.0, cbCr:5.5, cbMax:92 },
-  { id:'JAN 2027', start:'Dec 30, 2026', end:'Jan 29, 2027',  days:31, vacCr:4.25, scTrn:5.0, lcTrn:3.117, moveCr:5.25, sickCr:3.0, paidAbsCr:2.8,  ubpCr:3.0, cbCr:5.5, cbMax:92 },
+  { id:'MAY 2024', start:'May 1, 2024',  end:'May 30, 2024',  days:30, mon:'MAY', vacCr:3.75 },
+  { id:'JUN 2024', start:'May 31, 2024', end:'Jun 29, 2024',  days:30, mon:'JUN', vacCr:3.75 },
+  { id:'JUL 2024', start:'Jun 30, 2024', end:'Jul 29, 2024',  days:30, mon:'JUL', vacCr:3.75 },
+  { id:'AUG 2024', start:'Jul 30, 2024', end:'Aug 28, 2024',  days:30, mon:'AUG', vacCr:3.75 },
+  { id:'SEP 2024', start:'Aug 29, 2024', end:'Sep 28, 2024',  days:31, mon:'SEP', vacCr:3.75 },
+  { id:'OCT 2024', start:'Sep 29, 2024', end:'Oct 29, 2024',  days:31, mon:'OCT', vacCr:3.75 },
+  { id:'NOV 2024', start:'Oct 30, 2024', end:'Nov 29, 2024',  days:31, mon:'NOV', vacCr:3.75 },
+  { id:'DEC 2024', start:'Nov 30, 2024', end:'Dec 29, 2024',  days:30, mon:'DEC', vacCr:3.75 },
+  { id:'JAN 2025', start:'Dec 30, 2024', end:'Jan 29, 2025',  days:31, mon:'JAN', vacCr:3.75 },
+  { id:'FEB 2025', start:'Jan 30, 2025', end:'Mar 1, 2025',   days:31, mon:'FEB', vacCr:3.75 },
+  { id:'MAR 2025', start:'Mar 2, 2025',  end:'Mar 31, 2025',  days:30, mon:'MAR', vacCr:3.75 },
+  { id:'APR 2025', start:'Apr 1, 2025',  end:'Apr 30, 2025',  days:30, mon:'APR', vacCr:3.75 },
+  { id:'MAY 2025', start:'May 1, 2025',  end:'May 30, 2025',  days:30, mon:'MAY', vacCr:4.25 },
+  { id:'JUN 2025', start:'May 31, 2025', end:'Jun 29, 2025',  days:30, mon:'JUN', vacCr:4.25 },
+  { id:'JUL 2025', start:'Jun 30, 2025', end:'Jul 29, 2025',  days:30, mon:'JUL', vacCr:4.25 },
+  { id:'AUG 2025', start:'Jul 30, 2025', end:'Aug 28, 2025',  days:30, mon:'AUG', vacCr:4.25 },
+  { id:'SEP 2025', start:'Aug 29, 2025', end:'Sep 28, 2025',  days:31, mon:'SEP', vacCr:4.25 },
+  { id:'OCT 2025', start:'Sep 29, 2025', end:'Oct 29, 2025',  days:31, mon:'OCT', vacCr:4.25 },
+  { id:'NOV 2025', start:'Oct 30, 2025', end:'Nov 29, 2025',  days:31, mon:'NOV', vacCr:4.25 },
+  { id:'DEC 2025', start:'Nov 30, 2025', end:'Dec 29, 2025',  days:30, mon:'DEC', vacCr:4.25 },
+  { id:'JAN 2026', start:'Dec 30, 2025', end:'Jan 29, 2026',  days:31, mon:'JAN', vacCr:4.25 },
+  { id:'FEB 2026', start:'Jan 30, 2026', end:'Mar 1, 2026',   days:31, mon:'FEB', vacCr:4.25 },
+  { id:'MAR 2026', start:'Mar 2, 2026',  end:'Mar 31, 2026',  days:30, mon:'MAR', vacCr:4.25 },
+  { id:'APR 2026', start:'Apr 1, 2026',  end:'Apr 30, 2026',  days:30, mon:'APR', vacCr:4.25 },
+  { id:'MAY 2026', start:'May 1, 2026',  end:'May 30, 2026',  days:30, mon:'MAY', vacCr:4.25 },
+  { id:'JUN 2026', start:'May 31, 2026', end:'Jun 29, 2026',  days:30, mon:'JUN', vacCr:4.25 },
+  { id:'JUL 2026', start:'Jun 30, 2026', end:'Jul 29, 2026',  days:30, mon:'JUL', vacCr:4.25 },
+  { id:'AUG 2026', start:'Jul 30, 2026', end:'Aug 28, 2026',  days:30, mon:'AUG', vacCr:4.25 },
+  { id:'SEP 2026', start:'Aug 29, 2026', end:'Sep 28, 2026',  days:31, mon:'SEP', vacCr:4.25 },
+  { id:'OCT 2026', start:'Sep 29, 2026', end:'Oct 29, 2026',  days:31, mon:'OCT', vacCr:4.25 },
+  { id:'NOV 2026', start:'Oct 30, 2026', end:'Nov 29, 2026',  days:31, mon:'NOV', vacCr:4.25 },
+  { id:'DEC 2026', start:'Nov 30, 2026', end:'Dec 29, 2026',  days:30, mon:'DEC', vacCr:4.25 },
+  { id:'JAN 2027', start:'Dec 30, 2026', end:'Jan 29, 2027',  days:31, mon:'JAN', vacCr:4.25 },
 ];
 
-const tgl = { extraDay:'Yes', addDayOff:'Yes' };
+// Lineholder minimum days off lookup (from Data!AD:AE/AF)
+// Key = available days for line, value = [mdo_30day, mdo_31day]
+const LH_MDO = {
+   0:[0,0],  1:[0,0],  2:[1,1],  3:[1,1],  4:[2,2],  5:[2,2],  6:[2,2],
+   7:[3,3],  8:[3,3],  9:[4,4], 10:[4,4], 11:[4,4], 12:[5,5], 13:[5,5],
+  14:[6,5], 15:[6,6], 16:[6,6], 17:[7,7], 18:[7,7], 19:[8,7], 20:[8,8],
+  21:[8,8], 22:[9,9], 23:[9,9], 24:[10,9],25:[10,10],26:[10,10],27:[11,11],
+  28:[11,11],29:[12,11],30:[12,12],31:[null,12]
+};
 
+// Reserve days lookup from Data!Q:AC
+// Columns: Q=avail, R=TRVrdays(30d), S=TRVhdays(30d), T=LCLhdays(30d),
+//          U=TRVrdays(30dB), V=..., W=...,
+//          X=TRVrdays(31d), Y=TRVhdays(31d), Z=LCLhdays(31d)
+// From data: for 30-day: reserve days = R, HDOs = T (col4 = VLOOKUP col4)
+//            for 31-day: reserve days = X, HDOs = Z (col7 = VLOOKUP col7)
+// R51 = VLOOKUP(U51, Data!Q:AC, S53) - W51 + extraDay
+// S51 = bid period type letter (B,E,H,K)
+// S53 = XLOOKUP(S51, Q38:Q49, R38:R49) -> letter->column offset
+// From Data rows 38-49: A->2, B->3, C->4, D->5, E->6, F->7, G->8, H->9, I->10, J->11, K->12, L->13
+
+const LETTER_TO_COL = {A:2,B:3,C:4,D:5,E:6,F:7,G:8,H:9,I:10,J:11,K:12,L:13};
+
+// The actual table from Q:AC (columns 1-13 within the table, Q=col1)
+// Row index = available days (Q column value)
+// Built from the extracted data above
+const RES_TABLE = {
+// avail: [col2=Rdays30, col3=HDO30, col4=HDO30b, col5=Rdays30B, col6, col7=Rdays31, col8, col9=HDO31, col10, col11=Rdays31B, col12, col13]
+// Simplified: for 30-day periods col index for R days = depends on bid type letter
+// For 30-day bid type B (normal): R col = 2 (Rdays), HDO col = 4
+// For 31-day bid type H (normal): R col = 8, HDO col = 10  (X, Z from our data)
+// From the actual extracted table:
+//   30-day periods: reserve_days = R column (col2), HDOs = T column (col4)
+//   31-day periods: reserve_days = X column (col8 within Q:AC = 8th col), HDOs = Z (col10)
+// R col positions within VLOOKUP range Q:AC (1-indexed from Q):
+//   col2 = R (TRV rdays 30day group A)
+//   col4 = T (HDOs for 30day)
+//   col8 = X (TRV rdays 31day)
+//   col10 = Z (HDOs for 31day)
+// But the actual column letter S53 picks varies by bid type letter
+// Bid type B = summer 30-day = col3; E = summer 31-day; H = nonsummer 31-day; K = nonsummer 31-day
+// From P column formula: JUN/JUL/AUG/DEC + 30days="E", +31days="K"; others 30="B", 31="H"
+// From the letter->col map: B=3, E=6, H=9, K=12
+// So for bid type B (col3 in VLOOKUP Q:AC), that's the S column in Data
+// From our table: S column = Q-R (Rdays for 30day)... wait those are formulas
+// Let me use the raw R column values directly:
+  0:  {r30:0,  h30:0,  r31:0,  h31:0},
+  1:  {r30:0,  h30:0,  r31:0,  h31:0},
+  2:  {r30:1,  h30:0,  r31:1,  h31:0},
+  3:  {r30:1,  h30:0,  r31:1,  h31:0},
+  4:  {r30:2,  h30:0,  r31:2,  h31:0},
+  5:  {r30:2,  h30:0,  r31:2,  h31:0},
+  6:  {r30:3,  h30:0,  r31:3,  h31:0},
+  7:  {r30:3,  h30:0,  r31:3,  h31:0},
+  8:  {r30:3,  h30:0,  r31:4,  h31:0},
+  9:  {r30:4,  h30:0,  r31:4,  h31:0},
+  10: {r30:4,  h30:0,  r31:5,  h31:0},
+  11: {r30:5,  h30:0,  r31:5,  h31:3},
+  12: {r30:5,  h30:3,  r31:5,  h31:3},
+  13: {r30:6,  h30:3,  r31:6,  h31:3},
+  14: {r30:6,  h30:3,  r31:6,  h31:3},
+  15: {r30:7,  h30:3,  r31:7,  h31:3},
+  16: {r30:7,  h30:3,  r31:7,  h31:4},
+  17: {r30:7,  h30:4,  r31:8,  h31:4},
+  18: {r30:8,  h30:4,  r31:8,  h31:4},
+  19: {r30:8,  h30:4,  r31:9,  h31:4},
+  20: {r30:9,  h30:4,  r31:9,  h31:4},
+  21: {r30:9,  h30:4,  r31:9,  h31:5},
+  22: {r30:10, h30:5,  r31:10, h31:5},
+  23: {r30:10, h30:5,  r31:10, h31:5},
+  24: {r30:10, h30:5,  r31:11, h31:5},
+  25: {r30:11, h30:5,  r31:11, h31:6},
+  26: {r30:11, h30:5,  r31:12, h31:6},
+  27: {r30:12, h30:6,  r31:12, h31:6},
+  28: {r30:12, h30:6,  r31:13, h31:6},
+  29: {r30:12, h30:6,  r31:13, h31:6},
+  30: {r30:13, h30:6,  r31:14, h31:6},
+  31: {r30:null,h30:null, r31:14, h31:6},
+};
+
+// Short call lookup from Lists!AJ:AK
+const SC_TABLE = [
+  {avail:31,sc:6},{avail:30,sc:6},{avail:29,sc:6},{avail:28,sc:6},{avail:27,sc:6},
+  {avail:26,sc:5},{avail:25,sc:5},{avail:24,sc:5},{avail:23,sc:5},{avail:22,sc:5},
+  {avail:21,sc:5},{avail:20,sc:5},{avail:19,sc:4},{avail:18,sc:4},{avail:17,sc:4},
+  {avail:16,sc:4},{avail:15,sc:4},{avail:14,sc:4},{avail:13,sc:4},{avail:12,sc:3},
+  {avail:11,sc:3},{avail:10,sc:3},{avail:9,sc:3},{avail:8,sc:3},{avail:7,sc:2},
+  {avail:6,sc:2},{avail:5,sc:2},{avail:4,sc:2},{avail:3,sc:2},{avail:2,sc:1},
+  {avail:1,sc:1},{avail:0,sc:0}
+];
+
+function scLookup(avail) {
+  const row = SC_TABLE.find(r => r.avail === Math.min(31, Math.max(0, avail)));
+  return row ? row.sc : 0;
+}
+
+// Toggle state
+const tgl = { extraDay:'Yes', addDayOff:'Yes' };
 function setTgl(k, v) {
   tgl[k] = v;
   document.getElementById(k+'Yes').classList.toggle('on', v==='Yes');
@@ -703,30 +553,22 @@ function setTgl(k, v) {
   calculate();
 }
 
-function toggleReserve() {
-  const rt = document.getElementById('reserveType').value;
-  document.getElementById('vecSection').style.display = rt !== 'Neither' ? 'flex' : 'none';
-}
-
+// Helpers
 function fmtHrs(h) {
-  if (isNaN(h) || h === null) return '—';
+  if (h === null || isNaN(h) || h === undefined) return '—';
   const s = h < 0 ? '-' : '';
   h = Math.abs(h);
   return `${s}${Math.floor(h)}:${String(Math.round((h-Math.floor(h))*60)).padStart(2,'0')}`;
 }
-
 function nv(id, def=0) {
   const v = parseFloat(document.getElementById(id).value);
   return isNaN(v) ? def : Math.max(0, v);
 }
-
 function upd(id, val) {
   const el = document.getElementById(id);
   if (!el) return;
   el.textContent = val;
-  el.classList.remove('flash');
-  void el.offsetWidth;
-  el.classList.add('flash');
+  el.classList.remove('flash'); void el.offsetWidth; el.classList.add('flash');
 }
 
 function calculate() {
@@ -739,77 +581,171 @@ function calculate() {
   document.getElementById('bpEnd').textContent   = bp.end;
   document.getElementById('bpLen').textContent   = bp.days + ' days';
 
-  const carryIn    = nv('carryInHrs') + nv('carryInMins') / 60;
-  const carryInDays= nv('carryInDays');
-  const lcf        = nv('lcfHrs',67) + nv('lcfMins') / 60;
-  const lcc        = nv('lccHrs',83) + nv('lccMins') / 60;
-  const vacDays    = nv('vacDays');
-  const shortTrn   = nv('shortTrn');
-  const longTrn    = nv('longTrn');
-  const moveDays   = nv('moveDays');
-  const unpaidDays = nv('unpaidDays');
-  const sickDays   = nv('sickDays');
-  const paidAbsDays= nv('paidAbsDays');
-  const ubpDays    = nv('ubpDays');
-  const cbDays     = nv('cbDays');
-  const rt         = document.getElementById('reserveType').value;
+  // ── Inputs ──
+  const carryIn     = nv('carryInHrs') + nv('carryInMins') / 60;
+  const carryInDays = nv('carryInDays');
+  const lcf         = nv('lcfHrs',67) + nv('lcfMins') / 60;
+  const lcc         = nv('lccHrs',83) + nv('lccMins') / 60;
+  const vacDays     = nv('vacDays');
+  const shortTrn    = nv('shortTrn');
+  const longTrn     = nv('longTrn');
+  const moveDays    = nv('moveDays');
+  const unpaidDays  = nv('unpaidDays');
+  const sickDays    = nv('sickDays');
+  const paidAbsDays = nv('paidAbsDays');
+  const ubpDays     = nv('ubpDays');
+  const cbDays      = nv('cbDays');
+  const resBlocks   = nv('reserveBlocks', 3);
+  const extraDay    = tgl.extraDay === 'Yes';
+  const addDayOff   = tgl.addDayOff === 'Yes';
 
-  const vacCr    = vacDays     * bp.vacCr;
-  const scTrnCr  = shortTrn    * bp.scTrn;
-  const lcTrnCr  = longTrn     * bp.lcTrn;
-  const moveCr   = moveDays    * bp.moveCr;
-  const sickCr   = sickDays    * bp.sickCr;
-  const paidAbsCr= paidAbsDays * bp.paidAbsCr;
-  const ubpCr    = ubpDays     * bp.ubpCr;
-  const cbCr     = Math.min(cbDays * bp.cbCr, bp.cbMax);
+  // ── Credit calculations (all in decimal hours) ──
+  // From UPA / Data sheet:
+  const vacCr      = vacDays     * bp.vacCr;         // vacation credit
+  const scTrnCr    = shortTrn    * 5.0;              // short training: 5:00/day (Data!N8)
+  const lcTrnCr    = longTrn     * (2+20/60);        // long training: 2:20/day (Data!N6)
+  const moveCr     = moveDays    * (5+15/60);        // move: 5:15/day (Data!N12)
+  const sickCr     = sickDays    * 3.0;              // sick: 3:00/day (Data!N3)
+  const paidAbsCr  = paidAbsDays * (2+48/60);        // paid absence: 2:48/day (Data!N2)
+  const ubpCr      = ubpDays     * 3.0;              // UBP paid: 3:00/day (Data!N3)
+  const cbCr       = Math.min(cbDays * (5+30/60), CB_MAX_HRS);  // CB: 5:30/day, max 90hrs
 
-  const absenceDays = vacDays + shortTrn + unpaidDays + sickDays + paidAbsDays + ubpDays + cbDays + carryInDays + longTrn;
-  const availDays   = Math.max(0, bp.days - absenceDays);
+  // Add pay (move, CB, UBP are separate "add pay" items)
+  const addPay = moveCr + cbCr + ubpCr;
 
-  const preFloor = carryIn + vacCr + scTrnCr + lcTrnCr + moveCr + sickCr + paidAbsCr + ubpCr;
+  // ── Available days ──
+  // U17 = O19 - D23 - S23 - D47 - D49 - D53 - D65 - F67 - D69 - D57 - D59 - D61 - D63
+  // Simplified: total days minus all blocked days
+  const totalBlockedDays = carryInDays + vacDays + shortTrn + longTrn + moveDays +
+                           unpaidDays + sickDays + paidAbsDays + ubpDays + cbDays;
+  const availDays = Math.max(0, bp.days - totalBlockedDays);
+
+  upd('res-avail-days', availDays + ' days');
+
+  // ── Bid period type for reserve lookup ──
+  // From P column formula: JUN/JUL/AUG/DEC + 30days="E", +31days="K"; others 30="B", 31="H"
+  const summerMonths = ['JUN','JUL','AUG','DEC'];
+  const isSummer = summerMonths.includes(bp.mon);
+  const is31 = bp.days === 31;
+  // For reserve table lookup we just need 30 vs 31 day
+  // The HDO column varies by bid type letter but for simplicity:
+  // 30-day: r30 = reserve days, h30 = HDOs
+  // 31-day: r31 = reserve days, h31 = HDOs
+
+  // ── Lineholder MDO ──
+  // S23 = VLOOKUP on available days in the MDO table
+  // The lookup key is: O19 - D47 - I51 - sick_if_not_short - D63 - D65 - F67 - D69 - D53
+  // Simplified: availDays (already computed accounting for absences)
+  const lhMDOLookupKey = Math.min(31, Math.max(0, availDays));
+  const mdoEntry = LH_MDO[lhMDOLookupKey];
+  const lhMDO = mdoEntry ? (is31 ? mdoEntry[1] : mdoEntry[0]) : 0;
+
+  upd('lh-mdo', lhMDO + ' days');
+
+  // ── Lineholder: min and max flying, LPV, PTC ──
+  // Pre-assigned credit that counts toward the floor
+  const preFloor = carryIn + vacCr + scTrnCr + lcTrnCr + sickCr + paidAbsCr + ubpCr;
   const minFlying = Math.max(0, lcf - preFloor);
   const maxFlying = Math.max(0, lcc - preFloor);
 
-  const baseCr  = carryIn + vacCr + sickCr + paidAbsCr + ubpCr + scTrnCr + lcTrnCr;
+  const baseCr  = carryIn + vacCr + scTrnCr + lcTrnCr + sickCr + paidAbsCr + ubpCr;
   const lpvMin  = baseCr + minFlying;
   const lpvMax  = baseCr + maxFlying;
-  const ptcMin  = lpvMin;
+  const ptcMin  = lpvMin;   // Pre-PBS: PTC ≈ LPV
   const ptcMax  = lpvMax;
 
-  const RDAILY = 15459 / 3600;
-  const sto    = shortTrn <= 2 ? shortTrn : (shortTrn <= 4 ? shortTrn-1 : shortTrn===5 ? 2 : 3);
-  const rDays  = Math.max(0, availDays - sto - moveDays - carryInDays);
-  let mpg = 0;
-  if (rt !== 'Neither') {
-    mpg = rDays * RDAILY + longTrn * 5.0;
-    if (rt === 'VEC')      mpg += rDays * 0.25;
-    else if (rt === 'VSC') mpg += rDays * (20/60);
-  }
+  const paidMin = Math.max(ptcMin, 0);
+  const paidMax = Math.max(ptcMax, 0);
 
-  const paidMin = Math.max(mpg, ptcMin);
-  const paidMax = Math.max(mpg, ptcMax);
-  const addPay  = moveCr + cbCr + ubpCr;
-  const deadband= Math.max(0, mpg - lpvMin);
+  upd('lh-min-flying', fmtHrs(minFlying));
+  upd('lh-min-lpv',    fmtHrs(lpvMin));
+  upd('lh-min-ptc',    fmtHrs(ptcMin));
+  upd('lh-max-flying', fmtHrs(maxFlying));
+  upd('lh-max-lpv',    fmtHrs(lpvMax));
+  upd('lh-max-ptc',    fmtHrs(ptcMax));
+  upd('lh-paid-min',   fmtHrs(paidMin));
+  upd('lh-paid-min-sub', addPay > 0 ? '+ Add Pay: ' + fmtHrs(addPay) : '');
+  upd('lh-paid-max',   fmtHrs(paidMax));
+  upd('lh-paid-max-sub', addPay > 0 ? '+ Add Pay: ' + fmtHrs(addPay) : '');
+  upd('lh-badge-min',  ptcMin > lpvMin ? 'PTC' : 'LPV');
+  upd('lh-badge-max',  ptcMax > lpvMax ? 'PTC' : 'LPV');
 
-  upd('res-avail-days', availDays + ' days');
-  upd('res-min-flying', fmtHrs(minFlying));
-  upd('res-min-lpv',    fmtHrs(lpvMin));
-  upd('res-ptc-min',    fmtHrs(ptcMin));
-  upd('res-max-flying', fmtHrs(maxFlying));
-  upd('res-max-lpv',    fmtHrs(lpvMax));
-  upd('res-ptc-max',    fmtHrs(ptcMax));
-  upd('res-mpg',        rt === 'Neither' ? 'N/A' : fmtHrs(mpg));
-  upd('res-mpg-sub',    rt === 'Neither' ? 'Lineholder — not applicable' : 'Reserve minimum pay floor');
-  upd('res-deadband',   fmtHrs(deadband));
-  upd('res-paid-min',   fmtHrs(paidMin));
-  upd('res-paid-min-sub', addPay > 0 ? '+ Add Pay: ' + fmtHrs(addPay) : '');
-  upd('res-paid-max',   fmtHrs(paidMax));
-  upd('res-paid-max-sub', addPay > 0 ? '+ Add Pay: ' + fmtHrs(addPay) : '');
-  upd('badge-min', mpg > ptcMin ? 'MPG' : 'LPV/PTC');
-  upd('badge-max', mpg > ptcMax ? 'MPG' : 'LPV/PTC');
+  // ── Reserve: lookup table key ──
+  // U51 = O19 - D47 - I51 - D53 - D59 - D61 - D63 - F67 - D69 - D65
+  // = bp.days - vacDays - shortTrnOffset - longTrn - unpaidDays - sickDays - paidAbsDays - ubpDays - cbDays - carryInDays
+  // I51 = short training offset for reserve = same logic as shortTrnOffset
+  const shortTrnOffset = shortTrn <= 2 ? shortTrn : (shortTrn <= 4 ? shortTrn-1 : shortTrn===5 ? 2 : 3);
+  const u51 = Math.max(0, bp.days - vacDays - shortTrnOffset - longTrn - unpaidDays -
+                          sickDays - paidAbsDays - ubpDays - cbDays - carryInDays);
+
+  // W51 = D49 + D23 + D57 = shortTrn + carryInDays + moveDays
+  const w51 = shortTrn + carryInDays + moveDays;
+
+  // Get table entry
+  const rtKey = Math.min(31, Math.max(0, u51));
+  const rtEntry = RES_TABLE[rtKey] || {r30:0,h30:0,r31:0,h31:0};
+  const rawRdays = is31 ? rtEntry.r31 : rtEntry.r30;
+  const rawHDOs  = is31 ? rtEntry.h31 : rtEntry.h30;
+
+  // ── TRV reserve days ──
+  // R51 = VLOOKUP(U51, ...) - W51 + extraDay
+  const trvDays = Math.max(0, (rawRdays || 0) - w51 + (extraDay ? 1 : 0));
+  // TRV HDOs
+  const trvHDOs = rawHDOs || 0;
+  // TRV MPG: R55 = ((R51 + carryInDays + shortTrn + moveDays) * RESERVE_DAILY) + (longTrn * LONG_TRN_RES)
+  const trvMPG  = ((trvDays + carryInDays + shortTrn + moveDays) * RESERVE_DAILY) + (longTrn * LONG_TRN_RES);
+  const trvMinPay = trvMPG;
+  // Short calls for TRV: R59 = XLOOKUP(U51, Lists!AJ, Lists!AK)
+  const trvSC = scLookup(u51);
+
+  upd('trv-days',    trvDays + ' days');
+  upd('trv-hdos',    trvHDOs + ' days');
+  upd('trv-mpg',     fmtHrs(trvMPG));
+  upd('trv-min-pay', fmtHrs(trvMinPay));
+  upd('trv-min-pay-sub', addPay > 0 ? '+ Add Pay: ' + fmtHrs(addPay) : '');
+  upd('trv-sc',      trvSC);
+
+  // ── LCL: same reserve days as TRV, HDOs same, MPG same, SC = 0 ──
+  const lclDays   = trvDays;
+  const lclHDOs   = trvHDOs;
+  const lclMPG    = trvMPG;
+  const lclMinPay = trvMinPay;
+
+  upd('lcl-days',    lclDays + ' days');
+  upd('lcl-hdos',    lclHDOs + ' days');
+  upd('lcl-mpg',     fmtHrs(lclMPG));
+  upd('lcl-min-pay', fmtHrs(lclMinPay));
+  upd('lcl-min-pay-sub', addPay > 0 ? '+ Add Pay: ' + fmtHrs(addPay) : '');
+  upd('lcl-sc',      '0');
+
+  // ── VEC ──
+  // R75 = R63 - IF(addDayOff, 1, 0)   [LCL days minus 1 if additional day off chosen]
+  const vecDays = Math.max(0, lclDays - (addDayOff ? 1 : 0));
+  // R77 = R65 = LCL HDOs = same as TRV HDOs
+  const vecHDOs = lclHDOs;
+  // VEC extra credit: V79 = R75 * 0:15 = vecDays * VEC_PER_DAY
+  const vecExtraCr = vecDays * VEC_PER_DAY;
+  // V81 = (resBlocks * 2) / 24 hrs = block-in credit
+  const vecBlockCr = (resBlocks * 2) / 24;  // each block = 2 hrs per formula (D79*2)/24 — in decimal days, convert: actually it's hrs directly
+  // V81 = (D79*2)/24 — this is in Excel day units, so in hours: (D79*2)/24 * 24 = D79*2 hrs
+  const vecBlockHrs = resBlocks * 2;
+  // R79 = ((R75 + carryInDays + shortTrn + moveDays) * RESERVE_DAILY) + (longTrn * LONG_TRN_RES)
+  // Note: for VEC the formula does NOT add vecExtraCr to MPG base (V75=VEC so IF(V75="VSC",V79,0)=0)
+  const vecMPG = ((vecDays + carryInDays + shortTrn + moveDays) * RESERVE_DAILY) + (longTrn * LONG_TRN_RES);
+  // U81 = P81 + R81 = R79 + (addPay_items + vecBlockHrs + vecExtraCr)
+  // R81 = R69 + IF(V75="VSC",0,V79) + V81 = addPay_from_LCL + vecExtraCr + vecBlockHrs
+  //   where R69 = K47 + K65 + K69 = vac_pay + ubp_pay + cb_pay = addPay (move + cb + ubp)
+  const vecMinPay = vecMPG;
+  const vecAddPay = addPay + vecExtraCr + vecBlockHrs;
+
+  upd('vec-days',    vecDays + ' days');
+  upd('vec-hdos',    vecHDOs + ' days');
+  upd('vec-mpg',     fmtHrs(vecMPG));
+  upd('vec-min-pay', fmtHrs(vecMinPay));
+  upd('vec-min-pay-sub', vecAddPay > 0 ? '+ Add Pay: ' + fmtHrs(vecAddPay) : '');
 }
 
-// Init
+// ── Init ────────────────────────────────────────────────────────────────────
 (function(){
   const sel = document.getElementById('bidPeriod');
   BID_PERIODS.forEach(bp => {
@@ -823,7 +759,6 @@ function calculate() {
     if (new Date(bp.end) >= today) { best = bp.id; break; }
   }
   sel.value = best;
-  toggleReserve();
   calculate();
 })();
 </script>
