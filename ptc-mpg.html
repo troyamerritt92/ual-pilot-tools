@@ -254,8 +254,8 @@
       <div class="toggle-row">
         <div><div class="tg-text">Extra Reserve Day? (LPA above 77)</div><div class="tg-sub">5-E-5-d — adds 1 reserve day to TRV/LCL</div></div>
         <div class="tg-btns">
-          <button class="tbtn" id="extraDayNo" onclick="setTgl('extraDay','No')">No</button>
-          <button class="tbtn on" id="extraDayYes" onclick="setTgl('extraDay','Yes')">Yes</button>
+          <button class="tbtn on" id="extraDayNo" onclick="setTgl('extraDay','No')">No</button>
+          <button class="tbtn" id="extraDayYes" onclick="setTgl('extraDay','Yes')">Yes</button>
         </div>
       </div>
       <div class="toggle-row">
@@ -413,39 +413,54 @@ const CB_MAX        = 3 + 22/60;     // 3 days 22 hrs max CB credit (Data!N14) �
 const CB_MAX_HRS = 90;
 
 const BID_PERIODS = [
-  { id:'MAY 2024', start:'May 1, 2024',  end:'May 30, 2024',  days:30, mon:'MAY', vacCr:3.75 },
-  { id:'JUN 2024', start:'May 31, 2024', end:'Jun 29, 2024',  days:30, mon:'JUN', vacCr:3.75 },
-  { id:'JUL 2024', start:'Jun 30, 2024', end:'Jul 29, 2024',  days:30, mon:'JUL', vacCr:3.75 },
-  { id:'AUG 2024', start:'Jul 30, 2024', end:'Aug 28, 2024',  days:30, mon:'AUG', vacCr:3.75 },
-  { id:'SEP 2024', start:'Aug 29, 2024', end:'Sep 28, 2024',  days:31, mon:'SEP', vacCr:3.75 },
-  { id:'OCT 2024', start:'Sep 29, 2024', end:'Oct 29, 2024',  days:31, mon:'OCT', vacCr:3.75 },
-  { id:'NOV 2024', start:'Oct 30, 2024', end:'Nov 29, 2024',  days:31, mon:'NOV', vacCr:3.75 },
-  { id:'DEC 2024', start:'Nov 30, 2024', end:'Dec 29, 2024',  days:30, mon:'DEC', vacCr:3.75 },
-  { id:'JAN 2025', start:'Dec 30, 2024', end:'Jan 29, 2025',  days:31, mon:'JAN', vacCr:3.75 },
-  { id:'FEB 2025', start:'Jan 30, 2025', end:'Mar 1, 2025',   days:31, mon:'FEB', vacCr:3.75 },
-  { id:'MAR 2025', start:'Mar 2, 2025',  end:'Mar 31, 2025',  days:30, mon:'MAR', vacCr:3.75 },
-  { id:'APR 2025', start:'Apr 1, 2025',  end:'Apr 30, 2025',  days:30, mon:'APR', vacCr:3.75 },
-  { id:'MAY 2025', start:'May 1, 2025',  end:'May 30, 2025',  days:30, mon:'MAY', vacCr:4.25 },
-  { id:'JUN 2025', start:'May 31, 2025', end:'Jun 29, 2025',  days:30, mon:'JUN', vacCr:4.25 },
-  { id:'JUL 2025', start:'Jun 30, 2025', end:'Jul 29, 2025',  days:30, mon:'JUL', vacCr:4.25 },
-  { id:'AUG 2025', start:'Jul 30, 2025', end:'Aug 28, 2025',  days:30, mon:'AUG', vacCr:4.25 },
-  { id:'SEP 2025', start:'Aug 29, 2025', end:'Sep 28, 2025',  days:31, mon:'SEP', vacCr:4.25 },
-  { id:'OCT 2025', start:'Sep 29, 2025', end:'Oct 29, 2025',  days:31, mon:'OCT', vacCr:4.25 },
-  { id:'NOV 2025', start:'Oct 30, 2025', end:'Nov 29, 2025',  days:31, mon:'NOV', vacCr:4.25 },
-  { id:'DEC 2025', start:'Nov 30, 2025', end:'Dec 29, 2025',  days:30, mon:'DEC', vacCr:4.25 },
-  { id:'JAN 2026', start:'Dec 30, 2025', end:'Jan 29, 2026',  days:31, mon:'JAN', vacCr:4.25 },
-  { id:'FEB 2026', start:'Jan 30, 2026', end:'Mar 1, 2026',   days:31, mon:'FEB', vacCr:4.25 },
-  { id:'MAR 2026', start:'Mar 2, 2026',  end:'Mar 31, 2026',  days:30, mon:'MAR', vacCr:4.25 },
-  { id:'APR 2026', start:'Apr 1, 2026',  end:'Apr 30, 2026',  days:30, mon:'APR', vacCr:4.25 },
-  { id:'MAY 2026', start:'May 1, 2026',  end:'May 30, 2026',  days:30, mon:'MAY', vacCr:4.25 },
-  { id:'JUN 2026', start:'May 31, 2026', end:'Jun 29, 2026',  days:30, mon:'JUN', vacCr:4.25 },
-  { id:'JUL 2026', start:'Jun 30, 2026', end:'Jul 29, 2026',  days:30, mon:'JUL', vacCr:4.25 },
-  { id:'AUG 2026', start:'Jul 30, 2026', end:'Aug 28, 2026',  days:30, mon:'AUG', vacCr:4.25 },
-  { id:'SEP 2026', start:'Aug 29, 2026', end:'Sep 28, 2026',  days:31, mon:'SEP', vacCr:4.25 },
-  { id:'OCT 2026', start:'Sep 29, 2026', end:'Oct 29, 2026',  days:31, mon:'OCT', vacCr:4.25 },
-  { id:'NOV 2026', start:'Oct 30, 2026', end:'Nov 29, 2026',  days:31, mon:'NOV', vacCr:4.25 },
-  { id:'DEC 2026', start:'Nov 30, 2026', end:'Dec 29, 2026',  days:30, mon:'DEC', vacCr:4.25 },
-  { id:'JAN 2027', start:'Dec 30, 2026', end:'Jan 29, 2027',  days:31, mon:'JAN', vacCr:4.25 },
+  { id:'MAY 2024', start:'May 1, 2024',   end:'May 30, 2024',  days:30, mon:'MAY', vacCr:3.75 },
+  { id:'JUN 2024', start:'May 31, 2024',  end:'Jun 29, 2024',  days:30, mon:'JUN', vacCr:3.75 },
+  { id:'JUL 2024', start:'Jun 30, 2024',  end:'Jul 29, 2024',  days:30, mon:'JUL', vacCr:3.75 },
+  { id:'AUG 2024', start:'Jul 30, 2024',  end:'Aug 28, 2024',  days:30, mon:'AUG', vacCr:3.75 },
+  { id:'SEP 2024', start:'Aug 29, 2024',  end:'Sep 28, 2024',  days:31, mon:'SEP', vacCr:3.75 },
+  { id:'OCT 2024', start:'Sep 29, 2024',  end:'Oct 29, 2024',  days:31, mon:'OCT', vacCr:3.75 },
+  { id:'NOV 2024', start:'Oct 30, 2024',  end:'Nov 29, 2024',  days:31, mon:'NOV', vacCr:3.75 },
+  { id:'DEC 2024', start:'Nov 30, 2024',  end:'Dec 29, 2024',  days:30, mon:'DEC', vacCr:3.75 },
+  { id:'JAN 2025', start:'Dec 30, 2024',  end:'Jan 29, 2025',  days:31, mon:'JAN', vacCr:3.75 },
+  { id:'FEB 2025', start:'Jan 30, 2025',  end:'Mar 1, 2025',   days:31, mon:'FEB', vacCr:3.75 },
+  { id:'MAR 2025', start:'Mar 2, 2025',   end:'Mar 31, 2025',  days:30, mon:'MAR', vacCr:3.75 },
+  { id:'APR 2025', start:'Apr 1, 2025',   end:'Apr 30, 2025',  days:30, mon:'APR', vacCr:3.75 },
+  { id:'MAY 2025', start:'May 1, 2025',   end:'May 30, 2025',  days:30, mon:'MAY', vacCr:4.25 },
+  { id:'JUN 2025', start:'May 31, 2025',  end:'Jun 29, 2025',  days:30, mon:'JUN', vacCr:4.25 },
+  { id:'JUL 2025', start:'Jun 30, 2025',  end:'Jul 29, 2025',  days:30, mon:'JUL', vacCr:4.25 },
+  { id:'AUG 2025', start:'Jul 30, 2025',  end:'Aug 28, 2025',  days:30, mon:'AUG', vacCr:4.25 },
+  { id:'SEP 2025', start:'Aug 29, 2025',  end:'Sep 28, 2025',  days:31, mon:'SEP', vacCr:4.25 },
+  { id:'OCT 2025', start:'Sep 29, 2025',  end:'Oct 29, 2025',  days:31, mon:'OCT', vacCr:4.25 },
+  { id:'NOV 2025', start:'Oct 30, 2025',  end:'Nov 29, 2025',  days:31, mon:'NOV', vacCr:4.25 },
+  { id:'DEC 2025', start:'Nov 30, 2025',  end:'Dec 29, 2025',  days:30, mon:'DEC', vacCr:4.25 },
+  { id:'JAN 2026', start:'Dec 30, 2025',  end:'Jan 29, 2026',  days:31, mon:'JAN', vacCr:4.25 },
+  { id:'FEB 2026', start:'Jan 30, 2026',  end:'Mar 1, 2026',   days:31, mon:'FEB', vacCr:4.25 },
+  { id:'MAR 2026', start:'Mar 2, 2026',   end:'Mar 31, 2026',  days:30, mon:'MAR', vacCr:4.25 },
+  { id:'APR 2026', start:'Apr 1, 2026',   end:'Apr 30, 2026',  days:30, mon:'APR', vacCr:4.25 },
+  { id:'MAY 2026', start:'May 1, 2026',   end:'May 30, 2026',  days:30, mon:'MAY', vacCr:4.25 },
+  { id:'JUN 2026', start:'May 31, 2026',  end:'Jun 29, 2026',  days:30, mon:'JUN', vacCr:4.25 },
+  { id:'JUL 2026', start:'Jun 30, 2026',  end:'Jul 29, 2026',  days:30, mon:'JUL', vacCr:4.25 },
+  { id:'AUG 2026', start:'Jul 30, 2026',  end:'Aug 28, 2026',  days:30, mon:'AUG', vacCr:4.25 },
+  { id:'SEP 2026', start:'Aug 29, 2026',  end:'Sep 28, 2026',  days:31, mon:'SEP', vacCr:4.25 },
+  { id:'OCT 2026', start:'Sep 29, 2026',  end:'Oct 29, 2026',  days:31, mon:'OCT', vacCr:4.25 },
+  { id:'NOV 2026', start:'Oct 30, 2026',  end:'Nov 29, 2026',  days:31, mon:'NOV', vacCr:4.25 },
+  { id:'DEC 2026', start:'Nov 30, 2026',  end:'Dec 29, 2026',  days:30, mon:'DEC', vacCr:4.25 },
+  { id:'JAN 2027', start:'Dec 30, 2026',  end:'Jan 29, 2027',  days:31, mon:'JAN', vacCr:4.25 },
+  { id:'FEB 2027', start:'Jan 30, 2027',  end:'Mar 1, 2027',   days:31, mon:'FEB', vacCr:4.25 },
+  { id:'MAR 2027', start:'Mar 2, 2027',   end:'Mar 31, 2027',  days:30, mon:'MAR', vacCr:4.25 },
+  { id:'APR 2027', start:'Apr 1, 2027',   end:'Apr 30, 2027',  days:30, mon:'APR', vacCr:4.25 },
+  { id:'MAY 2027', start:'May 1, 2027',   end:'May 30, 2027',  days:30, mon:'MAY', vacCr:4.25 },
+  { id:'JUN 2027', start:'May 31, 2027',  end:'Jun 29, 2027',  days:30, mon:'JUN', vacCr:4.25 },
+  { id:'JUL 2027', start:'Jun 30, 2027',  end:'Jul 29, 2027',  days:30, mon:'JUL', vacCr:4.25 },
+  { id:'AUG 2027', start:'Jul 30, 2027',  end:'Aug 28, 2027',  days:30, mon:'AUG', vacCr:4.25 },
+  { id:'SEP 2027', start:'Aug 29, 2027',  end:'Sep 28, 2027',  days:31, mon:'SEP', vacCr:4.25 },
+  { id:'OCT 2027', start:'Sep 29, 2027',  end:'Oct 29, 2027',  days:31, mon:'OCT', vacCr:4.25 },
+  { id:'NOV 2027', start:'Oct 30, 2027',  end:'Nov 29, 2027',  days:31, mon:'NOV', vacCr:4.25 },
+  { id:'DEC 2027', start:'Nov 30, 2027',  end:'Dec 29, 2027',  days:30, mon:'DEC', vacCr:4.25 },
+  { id:'JAN 2028', start:'Dec 30, 2027',  end:'Jan 29, 2028',  days:31, mon:'JAN', vacCr:4.25 },
+  { id:'FEB 2028', start:'Jan 30, 2028',  end:'Feb 29, 2028',  days:31, mon:'FEB', vacCr:4.25 },
+  { id:'MAR 2028', start:'Mar 1, 2028',   end:'Mar 30, 2028',  days:30, mon:'MAR', vacCr:4.25 },
+  { id:'APR 2028', start:'Mar 31, 2028',  end:'Apr 30, 2028',  days:31, mon:'APR', vacCr:4.25 },
 ];
 
 // Lineholder minimum days off lookup (from Data!AD:AE/AF)
@@ -474,58 +489,50 @@ const LETTER_TO_COL = {A:2,B:3,C:4,D:5,E:6,F:7,G:8,H:9,I:10,J:11,K:12,L:13};
 // The actual table from Q:AC (columns 1-13 within the table, Q=col1)
 // Row index = available days (Q column value)
 // Built from the extracted data above
+// RES_TABLE — sourced directly from Data!Q:AC in the spreadsheet.
+// Column mapping (1-indexed from Q=col1):
+//   Bid type letter → VLOOKUP column index: A=2,B=3,C=4,D=5,E=6,F=7,G=8,H=9,I=10,J=11,K=12,L=13
+//
+//   r30ns = col S (col3, bid type B) = Q - R  — non-summer 30-day Rdays
+//   r30s  = col V (col6, bid type E) = Q - U  — summer 30-day Rdays
+//   h30   = col T (col4, bid type C)           — HDOs for 30-day (R53: VLOOKUP Q:T col4)
+//   r31ns = col Y (col9, bid type H) = Q - X  — non-summer 31-day Rdays
+//   r31s  = col AB (col12, bid type K)= Q - AA — summer 31-day Rdays
+//   h31   = col W (col7, bid type F)           — HDOs for 31-day (R53: VLOOKUP Q:Z col7 = W)
+//           NOTE: h31 uses W column, NOT Z. Z and W differ at avail=11,16,21,25,26,31.
 const RES_TABLE = {
-// avail: [col2=Rdays30, col3=HDO30, col4=HDO30b, col5=Rdays30B, col6, col7=Rdays31, col8, col9=HDO31, col10, col11=Rdays31B, col12, col13]
-// Simplified: for 30-day periods col index for R days = depends on bid type letter
-// For 30-day bid type B (normal): R col = 2 (Rdays), HDO col = 4
-// For 31-day bid type H (normal): R col = 8, HDO col = 10  (X, Z from our data)
-// From the actual extracted table:
-//   30-day periods: reserve_days = R column (col2), HDOs = T column (col4)
-//   31-day periods: reserve_days = X column (col8 within Q:AC = 8th col), HDOs = Z (col10)
-// R col positions within VLOOKUP range Q:AC (1-indexed from Q):
-//   col2 = R (TRV rdays 30day group A)
-//   col4 = T (HDOs for 30day)
-//   col8 = X (TRV rdays 31day)
-//   col10 = Z (HDOs for 31day)
-// But the actual column letter S53 picks varies by bid type letter
-// Bid type B = summer 30-day = col3; E = summer 31-day; H = nonsummer 31-day; K = nonsummer 31-day
-// From P column formula: JUN/JUL/AUG/DEC + 30days="E", +31days="K"; others 30="B", 31="H"
-// From the letter->col map: B=3, E=6, H=9, K=12
-// So for bid type B (col3 in VLOOKUP Q:AC), that's the S column in Data
-// From our table: S column = Q-R (Rdays for 30day)... wait those are formulas
-// Let me use the raw R column values directly:
-  0:  {r30:0,  h30:0,  r31:0,  h31:0},
-  1:  {r30:0,  h30:0,  r31:0,  h31:0},
-  2:  {r30:1,  h30:0,  r31:1,  h31:0},
-  3:  {r30:1,  h30:0,  r31:1,  h31:0},
-  4:  {r30:2,  h30:0,  r31:2,  h31:0},
-  5:  {r30:2,  h30:0,  r31:2,  h31:0},
-  6:  {r30:3,  h30:0,  r31:3,  h31:0},
-  7:  {r30:3,  h30:0,  r31:3,  h31:0},
-  8:  {r30:3,  h30:0,  r31:4,  h31:0},
-  9:  {r30:4,  h30:0,  r31:4,  h31:0},
-  10: {r30:4,  h30:0,  r31:5,  h31:0},
-  11: {r30:5,  h30:0,  r31:5,  h31:3},
-  12: {r30:5,  h30:3,  r31:5,  h31:3},
-  13: {r30:6,  h30:3,  r31:6,  h31:3},
-  14: {r30:6,  h30:3,  r31:6,  h31:3},
-  15: {r30:7,  h30:3,  r31:7,  h31:3},
-  16: {r30:7,  h30:3,  r31:7,  h31:4},
-  17: {r30:7,  h30:4,  r31:8,  h31:4},
-  18: {r30:8,  h30:4,  r31:8,  h31:4},
-  19: {r30:8,  h30:4,  r31:9,  h31:4},
-  20: {r30:9,  h30:4,  r31:9,  h31:4},
-  21: {r30:9,  h30:4,  r31:9,  h31:5},
-  22: {r30:10, h30:5,  r31:10, h31:5},
-  23: {r30:10, h30:5,  r31:10, h31:5},
-  24: {r30:10, h30:5,  r31:11, h31:5},
-  25: {r30:11, h30:5,  r31:11, h31:6},
-  26: {r30:11, h30:5,  r31:12, h31:6},
-  27: {r30:12, h30:6,  r31:12, h31:6},
-  28: {r30:12, h30:6,  r31:13, h31:6},
-  29: {r30:12, h30:6,  r31:13, h31:6},
-  30: {r30:13, h30:6,  r31:14, h31:6},
-  31: {r30:null,h30:null, r31:14, h31:6},
+  0:   {r30ns:0,    r30s:0,    h30:0,    r31ns:0,    r31s:0,    h31:0},
+  1:   {r30ns:1,    r30s:1,    h30:0,    r31ns:1,    r31s:1,    h31:0},
+  2:   {r30ns:1,    r30s:1,    h30:0,    r31ns:1,    r31s:1,    h31:0},
+  3:   {r30ns:2,    r30s:2,    h30:0,    r31ns:2,    r31s:2,    h31:0},
+  4:   {r30ns:2,    r30s:2,    h30:0,    r31ns:2,    r31s:2,    h31:0},
+  5:   {r30ns:3,    r30s:3,    h30:0,    r31ns:3,    r31s:3,    h31:0},
+  6:   {r30ns:3,    r30s:4,    h30:0,    r31ns:3,    r31s:3,    h31:0},
+  7:   {r30ns:4,    r30s:4,    h30:0,    r31ns:4,    r31s:4,    h31:0},
+  8:   {r30ns:5,    r30s:5,    h30:0,    r31ns:4,    r31s:5,    h31:0},
+  9:   {r30ns:5,    r30s:5,    h30:0,    r31ns:5,    r31s:5,    h31:0},
+  10:  {r30ns:6,    r30s:6,    h30:0,    r31ns:5,    r31s:6,    h31:0},
+  11:  {r30ns:6,    r30s:7,    h30:0,    r31ns:6,    r31s:6,    h31:0},
+  12:  {r30ns:7,    r30s:7,    h30:3,    r31ns:7,    r31s:7,    h31:3},
+  13:  {r30ns:7,    r30s:8,    h30:3,    r31ns:7,    r31s:8,    h31:3},
+  14:  {r30ns:8,    r30s:8,    h30:3,    r31ns:8,    r31s:8,    h31:3},
+  15:  {r30ns:8,    r30s:9,    h30:3,    r31ns:8,    r31s:9,    h31:3},
+  16:  {r30ns:9,    r30s:10,   h30:3,    r31ns:9,    r31s:9,    h31:3},
+  17:  {r30ns:10,   r30s:10,   h30:4,    r31ns:9,    r31s:10,   h31:4},
+  18:  {r30ns:10,   r30s:11,   h30:4,    r31ns:10,   r31s:10,   h31:4},
+  19:  {r30ns:11,   r30s:11,   h30:4,    r31ns:10,   r31s:11,   h31:4},
+  20:  {r30ns:11,   r30s:12,   h30:4,    r31ns:11,   r31s:12,   h31:4},
+  21:  {r30ns:12,   r30s:13,   h30:4,    r31ns:12,   r31s:12,   h31:4},
+  22:  {r30ns:12,   r30s:13,   h30:5,    r31ns:12,   r31s:13,   h31:5},
+  23:  {r30ns:13,   r30s:14,   h30:5,    r31ns:13,   r31s:13,   h31:5},
+  24:  {r30ns:14,   r30s:14,   h30:5,    r31ns:13,   r31s:14,   h31:5},
+  25:  {r30ns:14,   r30s:15,   h30:5,    r31ns:14,   r31s:14,   h31:5},
+  26:  {r30ns:15,   r30s:16,   h30:5,    r31ns:14,   r31s:15,   h31:5},
+  27:  {r30ns:15,   r30s:16,   h30:6,    r31ns:15,   r31s:16,   h31:6},
+  28:  {r30ns:16,   r30s:17,   h30:6,    r31ns:15,   r31s:16,   h31:6},
+  29:  {r30ns:17,   r30s:17,   h30:6,    r31ns:16,   r31s:17,   h31:6},
+  30:  {r30ns:17,   r30s:18,   h30:6,    r31ns:16,   r31s:17,   h31:6},
+  31:  {r30ns:null, r30s:null, h30:null, r31ns:17,   r31s:18,   h31:null},
 };
 
 // Short call lookup from Lists!AJ:AK
@@ -545,7 +552,7 @@ function scLookup(avail) {
 }
 
 // Toggle state
-const tgl = { extraDay:'Yes', addDayOff:'Yes' };
+const tgl = { extraDay:'No', addDayOff:'Yes' };
 function setTgl(k, v) {
   tgl[k] = v;
   document.getElementById(k+'Yes').classList.toggle('on', v==='Yes');
@@ -603,7 +610,7 @@ function calculate() {
   // From UPA / Data sheet:
   const vacCr      = vacDays     * bp.vacCr;         // vacation credit
   const scTrnCr    = shortTrn    * 5.0;              // short training: 5:00/day (Data!N8)
-  const lcTrnCr    = longTrn     * (2+20/60);        // long training: 2:20/day (Data!N6)
+  const lcTrnCr    = longTrn     * (3+7/60);          // long training: 3:07/day (Data!H, lineholder rate)
   const moveCr     = moveDays    * (5+15/60);        // move: 5:15/day (Data!N12)
   const sickCr     = sickDays    * 3.0;              // sick: 3:00/day (Data!N3)
   const paidAbsCr  = paidAbsDays * (2+48/60);        // paid absence: 2:48/day (Data!N2)
@@ -672,20 +679,42 @@ function calculate() {
 
   // ── Reserve: lookup table key ──
   // U51 = O19 - D47 - I51 - D53 - D59 - D61 - D63 - F67 - D69 - D65
-  // = bp.days - vacDays - shortTrnOffset - longTrn - unpaidDays - sickDays - paidAbsDays - ubpDays - cbDays - carryInDays
-  // I51 = short training offset for reserve = same logic as shortTrnOffset
-  const shortTrnOffset = shortTrn <= 2 ? shortTrn : (shortTrn <= 4 ? shortTrn-1 : shortTrn===5 ? 2 : 3);
+  // NOTE: D23(carryInDays), D49(shortTrn raw), D57(moveDays) are NOT subtracted here —
+  // they live only in W51, which is subtracted AFTER the table lookup.
+  //
+  // I51 formula begins: IF(G53="NO", 0, ...)
+  // G53 = "No" whenever longTrn = 0 (no long course training selected).
+  // Excel string comparison is case-insensitive, so "No" matches "NO" → I51 = 0.
+  // The short training offset (I51) is therefore ONLY non-zero when longTrn > 0.
+  // When longTrn > 0, I51 = IF(D49=6 or hybrid, 3, based on D49 count).
+  const shortTrnOffset = longTrn === 0 ? 0
+    : (shortTrn >= 6 ? 3
+      : shortTrn === 5 ? 2
+      : shortTrn === 4 ? 1
+      : 0);
   const u51 = Math.max(0, bp.days - vacDays - shortTrnOffset - longTrn - unpaidDays -
-                          sickDays - paidAbsDays - ubpDays - cbDays - carryInDays);
+                          sickDays - paidAbsDays - ubpDays - cbDays);
 
-  // W51 = D49 + D23 + D57 = shortTrn + carryInDays + moveDays
+  // W51 = D49 + D23 + D57 = shortTrn + carryInDays + moveDays (subtracted after lookup)
   const w51 = shortTrn + carryInDays + moveDays;
 
-  // Get table entry
+  // Get table entry — select Rdays column based on summer vs non-summer bid period
+  // Summer months (JUN, JUL, AUG, DEC) use col E (r30s) and col K (r31s)
+  // Non-summer months use col B (r30ns) and col H (r31ns)
   const rtKey = Math.min(31, Math.max(0, u51));
-  const rtEntry = RES_TABLE[rtKey] || {r30:0,h30:0,r31:0,h31:0};
-  const rawRdays = is31 ? rtEntry.r31 : rtEntry.r30;
-  const rawHDOs  = is31 ? rtEntry.h31 : rtEntry.h30;
+  const rtEntry = RES_TABLE[rtKey] || {r30ns:0, r30s:0, h30:0, r31ns:0, r31s:0, h31:0};
+  const rawRdays = is31
+    ? (isSummer ? rtEntry.r31s : rtEntry.r31ns)
+    : (isSummer ? rtEntry.r30s : rtEntry.r30ns);
+
+  // HDO lookup uses a SEPARATE key (R53 formula) — different from U51.
+  // R53 key = O19 - D47 - D53 - D59 - D63 - D65 - F67 - D69
+  // It does NOT subtract shortTrn (D49), sickDays (D61), carryInDays (D23), or moveDays (D57).
+  const hdoKey = Math.min(31, Math.max(0,
+    bp.days - vacDays - longTrn - unpaidDays - paidAbsDays - ubpDays - cbDays
+  ));
+  const hdoEntry = RES_TABLE[hdoKey] || {h30:0, h31:0};
+  const rawHDOs  = is31 ? hdoEntry.h31 : hdoEntry.h30;
 
   // ── TRV reserve days ──
   // R51 = VLOOKUP(U51, ...) - W51 + extraDay
@@ -747,18 +776,35 @@ function calculate() {
 
 // ── Init ────────────────────────────────────────────────────────────────────
 (function(){
-  const sel = document.getElementById('bidPeriod');
+  const sel   = document.getElementById('bidPeriod');
+  const today = new Date();
+
+  // Build a cutoff date: first day of the month that is 3 months before today.
+  // e.g. if today is Mar 15 2026, cutoff = Dec 1 2025 → show DEC 2025 onward.
+  const cutoff = new Date(today.getFullYear(), today.getMonth() - 3, 1);
+
   BID_PERIODS.forEach(bp => {
+    // Parse the bid period start date and compare to cutoff
+    const startDate = new Date(bp.start);
+    if (startDate < cutoff) return; // skip anything older than 3 months back
     const o = document.createElement('option');
-    o.value = bp.id; o.textContent = bp.id;
+    o.value = bp.id;
+    o.textContent = bp.id;
     sel.appendChild(o);
   });
-  const today = new Date();
-  let best = BID_PERIODS[BID_PERIODS.length-1].id;
+
+  // Default to the current active bid period (first one whose end date >= today)
+  let best = null;
   for (const bp of BID_PERIODS) {
     if (new Date(bp.end) >= today) { best = bp.id; break; }
   }
-  sel.value = best;
+  // If best is in the dropdown, select it; otherwise select the last visible option
+  if (best && [...sel.options].some(o => o.value === best)) {
+    sel.value = best;
+  } else if (sel.options.length > 0) {
+    sel.value = sel.options[sel.options.length - 1].value;
+  }
+
   calculate();
 })();
 </script>

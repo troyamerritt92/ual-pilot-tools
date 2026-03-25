@@ -314,12 +314,53 @@
     to   { opacity: 1; transform: translateY(0); }
   }
 
+  /* ── Beta banner ── */
+  .beta-banner {
+    background: #3d1a00;
+    border-top: 1px solid #c07000;
+    border-bottom: 3px solid var(--gold);
+    padding: 14px 28px;
+  }
+  .beta-banner-inner {
+    max-width: 760px;
+    margin: 0 auto;
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+  }
+  .beta-icon {
+    font-size: 20px;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .beta-text {
+    font-size: 13px;
+    color: #ffd899;
+    line-height: 1.65;
+  }
+  .beta-text strong {
+    color: var(--gold);
+    font-weight: 700;
+    display: block;
+    margin-bottom: 4px;
+    font-size: 13px;
+    letter-spacing: 0.01em;
+  }
+  .beta-text a {
+    color: var(--gold);
+    font-weight: 600;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+  .beta-text a:hover { color: #ffffff; }
+
   @media (max-width: 580px) {
     .tools-grid { grid-template-columns: 1fr; }
     .hero-title { font-size: 26px; }
     .header { padding: 0 16px; }
     .page { padding: 28px 12px 48px; }
     .hero { padding: 36px 16px 32px; }
+    .beta-banner { padding: 12px 16px; }
   }
 </style>
 </head>
@@ -339,6 +380,17 @@
   <p class="hero-sub">Unofficial calculators and reference tools built for United Airlines pilots. All tools are free, require no login, and update instantly as you type.</p>
 </div>
 
+<!-- Beta Warning -->
+<div class="beta-banner">
+  <div class="beta-banner-inner">
+    <div class="beta-icon">⚠</div>
+    <div class="beta-text">
+      <strong>BETA — These calculators are in testing and have not yet been verified for accuracy.</strong>
+      All tools are currently in beta. Results should be treated as estimates only and must be cross-checked against your official pay register, PRAP statements, and the UAL–ALPA Pilot Agreement before making any financial decisions. If you find an error or inaccuracy in any calculator, please report it to <a href="mailto:troyamerritt92@gmail.com">troyamerritt92@gmail.com</a> so it can be corrected promptly.
+    </div>
+  </div>
+</div>
+
 <!-- Main -->
 <div class="page">
 
@@ -349,7 +401,7 @@
     <!-- PTC/MPG Calculator -->
     <a class="tool-card" href="ptc-mpg.html">
       <div class="tool-card-top">
-        <span class="tool-tag live">Live</span>
+        <span class="tool-tag live">Beta</span>
         <span class="tool-icon">✈️</span>
         <div class="tool-name">PTC / MPG Pay Calculator</div>
       </div>
@@ -360,7 +412,7 @@
         <ul class="tool-features">
           <li>LCF / LCC min &amp; max scenarios</li>
           <li>All pre-blocked absence types</li>
-          <li>VEC / VSC reserve line support</li>
+          <li>TRV, LCL &amp; VEC reserve line results</li>
           <li>Bid periods through Jan 2027</li>
         </ul>
         <div class="tool-cta active">
@@ -373,7 +425,7 @@
     <!-- RHA / Active HRA Calculator -->
     <a class="tool-card" href="rha-calculator.html">
       <div class="tool-card-top">
-        <span class="tool-tag live">Live</span>
+        <span class="tool-tag live">Beta</span>
         <span class="tool-icon">🏥</span>
         <div class="tool-name">RHA / Active HRA Calculator</div>
       </div>
@@ -397,7 +449,7 @@
   </div>
 
   <div class="disclaimer">
-    <strong>Disclaimer:</strong> These tools are unofficial planning aids built by and for UAL pilots. They are not affiliated with, endorsed by, or sponsored by United Airlines or ALPA. Your actual pay and benefits are determined in accordance with the UAL–ALPA Pilot Agreement. Results cannot be used to support a grievance, pay claim, or benefits dispute. Always verify figures with your official pay register and contact your local ALPA representative for guidance.
+    <strong>Disclaimer:</strong> These tools are unofficial planning aids built by and for UAL pilots. They are not affiliated with, endorsed by, or sponsored by United Airlines or ALPA. Results are estimates only and cannot be used to support a grievance, pay claim, or benefits dispute. Always verify figures with your official pay register and contact your local ALPA representative for guidance. To report errors: <a href="mailto:troyamerritt92@gmail.com" style="color:var(--blue-sky); text-decoration:underline;">troyamerritt92@gmail.com</a>
   </div>
 
 </div>
