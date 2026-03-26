@@ -52,6 +52,41 @@
   .back-link { color: var(--blue-sky); font-size: 13.8px; text-decoration: none; display: flex; align-items: center; gap: 5px; }
   .back-link:hover { color: var(--white); }
 
+  /* Reset button */
+  .reset-btn {
+    background: transparent;
+    border: 1.5px solid rgba(255,255,255,0.25);
+    color: var(--blue-sky);
+    font-family: 'Inter', sans-serif;
+    font-size: 12.6px;
+    font-weight: 600;
+    padding: 5px 14px;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    letter-spacing: .03em;
+    transition: all .15s;
+    white-space: nowrap;
+  }
+  .reset-btn:hover { background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.5); color: var(--white); }
+  .reset-btn:active { background: rgba(255,255,255,0.18); }
+
+  .reset-bar {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 0 20px 28px;
+    display: flex;
+    justify-content: center;
+  }
+  .reset-bar .reset-btn {
+    background: var(--navy);
+    border: 1.5px solid var(--border-mid);
+    color: var(--text-muted);
+    font-size: 13.8px;
+    padding: 9px 28px;
+    border-radius: var(--radius);
+  }
+  .reset-bar .reset-btn:hover { background: var(--navy-light); border-color: var(--blue-light); color: var(--white); }
+
   /* Banner */
   .banner { background: var(--navy-mid); border-bottom: 3px solid var(--blue-med); padding: 12px 28px; }
   .banner p { color: var(--blue-sky); font-size: 14.4px; line-height: 1.55; }
@@ -170,6 +205,7 @@
   <div class="header-badge">UAL ALPA</div>
   <div class="header-sep"></div>
   <div class="header-title">PTC / MPG Pay Calculator</div>
+  <button class="reset-btn" onclick="resetAll()" title="Reset all inputs to defaults">↺ Reset</button>
   <a class="back-link" href="index.html">← All Tools</a>
 </div>
 
@@ -410,6 +446,10 @@
 
   <div class="disc">
     ⚠ This calculator is a planning aid only. Your actual pay is determined per the UAL–ALPA Pilot Agreement. Results cannot be used to support a grievance or pay claim. Verify against your pay register and contact your local ALPA representative for official guidance.
+  </div>
+
+  <div class="reset-bar">
+    <button class="reset-btn" onclick="resetAll()">↺ Reset All Inputs to Defaults</button>
   </div>
 
 </div>
@@ -858,6 +898,44 @@ function calculate() {
   const vecTotal = vecMPG + vecAddPay;
   upd('vec-total', fmtHrs(vecTotal));
   document.getElementById('vec-total-row').style.display = vecAddPay > 0 ? 'flex' : 'none';
+}
+
+// ── Reset ────────────────────────────────────────────────────────────────────
+function resetAll() {
+  // Number inputs → 0 (or their default)
+  const zeros = [
+    'carryInHrs','carryInMins','carryInDays',
+    'vacDays','shortTrn','longTrn','moveDays',
+    'unpaidDays','sickDays','paidAbsDays',
+    'ubpDays','ubuDays','cbDays'
+  ];
+  zeros.forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.value = 0;
+  });
+
+  // LCF/LCC defaults
+  document.getElementById('lcfHrs').value = 67;
+  document.getElementById('lcfMins').value = 0;
+  document.getElementById('lccHrs').value = 83;
+  document.getElementById('lccMins').value = 0;
+
+  // Reserve blocks default
+  document.getElementById('reserveBlocks').value = 3;
+
+  // Toggle defaults
+  tgl.extraDay  = 'No';
+  tgl.addDayOff = 'Yes';
+  document.querySelectorAll('.tbtn').forEach(b => b.classList.remove('on'));
+  document.getElementById('extraDayNo').classList.add('on');
+  document.getElementById('addDayOffYes').classList.add('on');
+
+  // Sync UBU field state, recalculate
+  syncUbu();
+  calculate();
+
+  // Scroll back to top smoothly
+  window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
 // ── Init ────────────────────────────────────────────────────────────────────
